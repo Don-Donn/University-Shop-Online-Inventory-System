@@ -20,7 +20,7 @@
             <h4>BatStateU Lipa Campus</h4>
         </div>
         <a class="logout-btn" href="login.php">
-            <img type="button" id="logout-icon" src="../icons/logout2.png" alt="Logout" width="40" height="30" ">
+            <img type="button" id="logout-icon" src="../icons/logout2.png" alt="Logout" width="42px" height="42px" ">
         </a>
     </nav>
 

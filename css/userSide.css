@@ -15,9 +15,11 @@ nav{
 }
 
 #logout-icon, a{
-    /*filter: invert(1);*/
+    filter: invert(1);
     position: absolute;
+    left: 90%;
     margin: 0;
+    margin-top: -45px;
     padding: 10px;
 }
 
