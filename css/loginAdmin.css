@@ -52,7 +52,7 @@ body{
     padding: 20px;
 }
 
-.please-login{
+.admin-login{
     font: arial;
     text-align: left;
     font-weight: normal;
@@ -74,13 +74,13 @@ label{
     font-size: 15px;
     padding: 10px;
 }
-.login-admin{
+.login-customer{
     font-size: 14px;
     display: flex;
     justify-content:center;
     align-items:center;
     color: green;
-    padding-top: 5px;
+    padding-top: 8px;
 }
 a:hover{
     opacity: .6;
