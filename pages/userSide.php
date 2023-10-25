@@ -11,17 +11,19 @@
 
 <body>
     <nav>
-        <img id="bsu-logo" src="../icons/bsuLogo.png" alt="Logo" width="100" height="90" >
+        <div>
+            <img id="bsu-logo" src="../icons/bsuLogo.png" alt="Logo" width="100" height="90" >
+        </div>
+
+        <div class="user-header">
+            <p id = "shop-txt">UNIVERSITY SHOP</p>
+            <h4 id = "location">BatStateU Lipa Campus</h4>
 
         <div>
-            <p id = "shop-txt">UNIVERSITY SHOP</p>
+            <a class="logout-btn" href="login.php">
+                <img type="button" id="logout-icon" src="../icons/logout2.png" alt="Logout" width="42px" height="42px" ">
+             </a>
         </div>
-        <div id = "location">
-            <h4>BatStateU Lipa Campus</h4>
-        </div>
-        <a class="logout-btn" href="login.php">
-            <img type="button" id="logout-icon" src="../icons/logout2.png" alt="Logout" width="42px" height="42px" ">
-        </a>
     </nav>
 
     <br>

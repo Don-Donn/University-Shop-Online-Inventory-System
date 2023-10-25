@@ -1,24 +1,27 @@
+body{
+    margin:0;
+}
+
 nav{
     position:relative;
     display:block;
     justify-content: space-between;
     background: maroon;
-    margin: 0;
     padding: 4px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 #bsu-logo{
     position: absolute;
-    margin: 0;
     padding: 10px;
+    left: 3%;
+    top: 15%;
 }
 
 #logout-icon, a{
     filter: invert(1);
     position: absolute;
     left: 90%;
-    margin: 0;
     margin-top: -45px;
     padding: 10px;
 }
@@ -28,7 +31,7 @@ nav{
 
 #shop-txt{
     font-weight: bold;
-    margin-bottom:0;
+    padding-bottom: 5px;
     padding-top: 10px;
     font-size: 40px;
     color: white;
@@ -45,23 +48,26 @@ nav{
     
 }
 .product-table {
-    margin: 0 auto; /* Center the table horizontally */
-    width: 70%;     /* Adjust the width as needed */
+    margin: 0 auto;
+    width: 70%;
     border-collapse: collapse;
   }
   
   .product-table th, .product-table td {
     padding: 10px;
     text-align: left;
+
   }
   
   .product-table thead th {
     background-color: maroon;
     color: white;
     border: 1px solid maroon;
+    font-size: 23px;
   }
   
   .product-table tbody td {
+    font-size: 20px;
     background-color: white;
     color: black;
     border: none;
