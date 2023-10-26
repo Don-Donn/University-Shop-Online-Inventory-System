@@ -10,14 +10,14 @@
 
 </head>
 <body>
-    <div class="header" id="header">
+    <header id="header">
         <div>
             <p id = "rgo">RESOURCE GENERATION OFFICE</p>
         </div>
         <div id = "location">
             <h4>BatStateU Lipa, Marawoy, Lipa City</h4>
         </div>
-    </div>
+    </header>
 <br>
 </br>
 

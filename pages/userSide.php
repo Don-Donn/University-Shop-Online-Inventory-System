@@ -38,7 +38,7 @@
             <th scope="col">Price</th>
         </tr>
         <tr>
-            <td></td>
+            <td>Dsfsdf</td>
             <td></td>
             <td></td>
             <td></td>

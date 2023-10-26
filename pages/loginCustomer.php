@@ -6,18 +6,18 @@
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../css/loginCustomer.css">
 
 </head>
 <body>
-    <div class="header" id="header">
-        <div>
-            <p id = "rgo">RESOURCE GENERATION OFFICE</p>
-        </div>
-        <div id = "location">
-            <h4>BatStateU Lipa, Marawoy, Lipa City</h4>
-        </div>
-    </div>
+    <header id="header">
+            <div>
+                <p id = "rgo">RESOURCE GENERATION OFFICE</p>
+            </div>
+            <div id = "location">
+                <h4>BatStateU Lipa, Marawoy, Lipa City</h4>
+            </div>
+    </header>
 <br>
 </br>
 

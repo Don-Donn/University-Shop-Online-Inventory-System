@@ -75,6 +75,7 @@ label{
     padding: 10px;
 }
 .login-admin{
+    text-decoration: none;
     font-size: 14px;
     display: flex;
     justify-content:center;

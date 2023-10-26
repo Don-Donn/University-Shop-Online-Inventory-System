@@ -75,6 +75,7 @@ label{
     padding: 10px;
 }
 .login-customer{
+    text-decoration: none;
     font-size: 14px;
     display: flex;
     justify-content:center;
