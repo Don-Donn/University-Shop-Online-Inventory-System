@@ -1,13 +1,48 @@
 
-    <!--</div>-->
-            <!-- /.container-fluid -->
+                </div>
+                <!-- /.container-fluid -->
+                
 
-        <!--</div>-->
-        <!-- End of Main Content -->
+            </div>
+            <!-- End of Main Content -->
 
-        <!-- Footer -->
+            <!-- Footer -->
+            <style>
+                .sticky-footer{
+                    position: fixed;
+                    bottom: 0;
+                    margin-left: 300px;
+                    display:block;
+                    width: calc(100% - 300px);
+                    background: rgb(235, 235, 235);
+                }
+                .copyright{
+                    color: maroon;
+                    margin: 0;
+  
+
+                    text-align: center;
+                    
+                }
+            </style>
+
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright © Maranan & Anuyo et al. Online Inventory System</span>
+                </div>
+                </div>
+            </footer>
 
         <!-- End of Footer -->
+            </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
 
     <!-- end body tag from sidebar -->
+    </body>
 <!-- Put here the end html tag -->
+</html>
