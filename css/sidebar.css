@@ -7,34 +7,27 @@
     top: 0;
     left: 0;
     background-color: white;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    box-shadow: 0 0 3px 0.01px rgba(0, 0, 0, .4);
+    box-shadow: 0 0 10px 0.01px rgba(0, 0, 0, .4);
     
 
 }
 
 .brand-container{
-    display:inline-block;
-    text-align: center;
     color: black;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
     padding: 0;
     padding-top: 0;
-    text-decoration: none;
     margin: 0;
 
 }
 
-#spartanLlogo{
-    display: inline-block;
-}
 
 .univ-txt{
     display: inline-block;
+    position: relative;
     margin: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
-    top: -50px;
+    top: -30px;
     line-height: 1.5;
 }
 

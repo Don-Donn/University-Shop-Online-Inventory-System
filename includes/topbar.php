@@ -15,7 +15,7 @@
 
                 right: 100%;
                 margin: 0;
-                padding: 40px;
+                padding: 27px;
                 text-align: center;
                 color: black;
                 font-size: 30px;

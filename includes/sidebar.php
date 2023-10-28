@@ -62,7 +62,7 @@
 
 
                     <!-- Divider -->
-                    <br><br><br><br><br><br><br><br><br><br><br><br>
+                    <br><br><br><br><br><br><br><br><br><br>
                     <hr class="sidebar-divider" id="logout-hr">
 
                     <!-- Sidebar Toggler (Logout) -->

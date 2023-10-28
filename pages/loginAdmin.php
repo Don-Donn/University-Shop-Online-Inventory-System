@@ -17,7 +17,7 @@
                 <p id = "rgo">RESOURCE GENERATION OFFICE</p>
             </div>
             <div id = "location">
-                <h4>BatStateU Lipa, Marawoy, Lipa City</h4>
+                <h4>BatStateU Lipa</h4>
             </div>
         </header>
     <br>
