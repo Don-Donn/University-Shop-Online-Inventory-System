@@ -1,5 +1,30 @@
 <!--require session-->
+    <?php
+    session_start();
+    
 
+    include("../includes/connection.php");
+    if (isset($_POST['login_user'])){
+        $useremail = $_POST['email'];
+        $password = $_POST['password'];
+
+        $query = "SELECT * FROM user_login WHERE User_Email = '$useremail' AND User_Password = '$password'";
+        $result = mysqli_query($con, $query);
+        
+        if (mysqli_num_rows($result) == 1) {
+            $row = mysqli_fetch_assoc($result);
+            if ($row['User_Type'] == "User") {
+                header("Location: userSide.php");
+            }
+         else {
+        
+            echo "<script>alert('Invalid, This is not User Account. Please Try Again'); window.location='loginCustomer.php'</script>";
+        }
+    }else{
+        echo "<script>alert('Invalid Email or Password. Please Try Again!'); window.location='loginCustomer.php'</script>";
+    }
+}
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -28,17 +53,17 @@
         </div>
 
         <div class="login_container">
-        <form action="login.php" method="post">
+        <form action=" " method="POST">
             <p class="please-login">Please Login</p>
 
-            <input type="text" id="email" name="email" placeholder="  Email address" required><br>
+            <input type="email" id="email" name="email" placeholder="  Email address" required><br>
 
             <input type="password" id="password" name="password" placeholder="  Password" required><br>
 
-            <button type="submit" name="login_user" id="login-button">Login</button>
+            <button type="submit" name="login_user" id="login-button" >Login</button>
 
             <p class="login-admin">
-                <a class="login-admin" href="#">Login as an ADMIN?</a>
+                <a class="login-admin" href="loginAdmin.php">Login as an ADMIN?</a>
             </p>
         </form>
         </div>

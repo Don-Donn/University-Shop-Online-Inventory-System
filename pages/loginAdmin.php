@@ -1,5 +1,30 @@
 <!--require session-->
 
+<?php
+    include("../includes/connection.php");
+    if (isset($_POST['login_user'])){
+        $useremail = $_POST['email'];
+        $password = $_POST['password'];
+
+        $query = "SELECT * FROM user_login WHERE User_Email = '$useremail' AND User_Password = '$password'";
+        $result = mysqli_query($con, $query);
+        
+        if (mysqli_num_rows($result) == 1) {
+            $row = mysqli_fetch_assoc($result);
+            if ($row['User_Type'] == "Admin") {
+        
+                header("Location: adminSide.php");
+        } else {
+        
+            echo "<script>alert('Invalid, This is not Admin Account. Please Try Again'); window.location='loginCustomer.php'</script>";
+        }
+    }else{
+        echo "<script>alert('Invalid Email or Password. Please Try Again!'); window.location='loginCustomer.php'</script>";
+    }
+}
+?>
+
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -28,17 +53,17 @@
         </div>
 
         <div class="login_container">
-        <form action="login.php" method="post">
+        <form action=" " method="post">
             <p class="admin-login">Admin Login</p>
 
-            <input type="text" id="email" name="email" placeholder="  Admin Username" required><br>
+            <input type="email" id="email" name="email" placeholder="  Admin Username" required><br>
 
             <input type="password" id="password" name="password" placeholder="  Admin Password" required><br>
 
             <button type="submit" name="login_user" id="login-button">Login</button>
 
             <p class="admin-login">
-                <a class="login-customer" href="#">Login as a CUSTOMER?</a>
+                <a class="login-customer" href="loginCustomer.php">Login as a CUSTOMER?</a>
             </p>
         </form>
         </div>
