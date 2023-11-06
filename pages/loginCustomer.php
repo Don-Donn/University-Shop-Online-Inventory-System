@@ -62,9 +62,6 @@
 
             <button type="submit" name="login_user" id="login-button" >Login</button>
 
-            <p class="login-admin">
-                <a class="login-admin" href="loginAdmin.php">Login as an ADMIN?</a>
-            </p>
         </form>
         </div>
 

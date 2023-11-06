@@ -62,9 +62,6 @@
 
             <button type="submit" name="login_user" id="login-button">Login</button>
 
-            <p class="admin-login">
-                <a class="login-customer" href="loginCustomer.php">Login as a CUSTOMER?</a>
-            </p>
         </form>
         </div>
 

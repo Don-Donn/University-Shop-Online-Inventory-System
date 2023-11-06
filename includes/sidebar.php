@@ -67,20 +67,18 @@
 
                     <!-- Sidebar Toggler (Logout) -->
                     
-                    <button class="logout-btn">Logout</button>
+                    <button id="btn" name="btn" class="logout-btn">Logout</button>
 
                     </div>
 
             </nav>
-            <script src="../css/sidebar.js"></script>
-
             <!-- End of Sidebar -->
 
 <!-- end div wrapper to footer-->
 
 <!-- include_once topbar/header -->
 <?php include_once 'topbar.php'; ?>
-
+<?php include_once '../pages/logoutAdmin.php'; ?>
 <!-- move end html tag to footer-->
 
 
