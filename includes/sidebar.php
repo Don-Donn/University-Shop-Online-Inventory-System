@@ -28,12 +28,7 @@
                     <hr class="sidebar-divider" id="header-hr">
 
                     <!-- Nav Items -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="overview.php">
-                            <!-- i or icon link tag -->
-                            <span>Overview</span>
-                        </a>
-                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="productInventory.php">
                             <!-- i or icon link tag -->
@@ -41,7 +36,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="inventoryHistory.php">
+                        <a class="nav-link" href="transaction.php">
                             <!-- i or icon link tag -->
                             <span>Inventory History</span>
                         </a>
