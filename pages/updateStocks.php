@@ -67,10 +67,10 @@ include'../includes/sidebar.php';
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="true" href="transaction.php">ADD PRODUCT</a>
+                    <a class="nav-link" href="transaction.php">ADD PRODUCT</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="updateStocks.php">UPDATE STOCKS</a>
+                    <a class="nav-link active" aria-current="true" href="updateStocks.php">UPDATE STOCKS</a>
                 </li>
             </ul>
         </div>
@@ -92,15 +92,12 @@ include'../includes/sidebar.php';
                 <input type="text" id="description" name="description" required>
                 <br>
                 
-                <label for="stocks">Stocks:</label><br>
+                <label for="stocks">Stocks Sold:</label><br>
                 <input type="number" id="stocks" name="stocks" required>
                 <br>
                 
-                <label for="price">Price:</label><br>
-                <input type="number" id="price" name="price" required>
-                <br>
                 
-                <button type="submit">ADD</button>
+                <button type="UPDATE">ADD</button>
             </form>
         </div>
 

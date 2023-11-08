@@ -1,7 +1,7 @@
 
    <!-- div for Content Wrapper of top bar-->
         <!-- div for Main Content of topbar -->
-    <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content-wrapper">
         <style>
             .topbar-header{
             margin: 0;
@@ -21,6 +21,10 @@
                 font-size: 30px;
                 font-weight: bold;
                 
+            }
+            .container-fluid{
+                padding:0;
+                padding-top:5px;
             }
 
         </style>

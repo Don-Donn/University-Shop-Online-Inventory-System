@@ -1,19 +1,14 @@
-<!-- include session/ confirm login? -->
-
-
 <!DOCTYPE html>
 <html>
 
     <title>University Shop</title>
-
-    <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <!-- Custom fonts for this template-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Custom styles-->
-    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="table.css">
  
  
     </head>
@@ -61,7 +56,7 @@
 
 
                     <!-- Divider -->
-                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                     <hr class="sidebar-divider" id="logout-hr">
 
                     <!-- Sidebar Toggler (Logout) -->
@@ -71,17 +66,53 @@
                     </div>
 
             </nav>
-            <!-- End of Sidebar -->
+            <div class="cardProduct">
+                <div class="card-header">
+                  <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item">
+                      <a class="nav-link active" aria-current="true" href="#">ADD PRODUCT</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">UPDATE STOCKS</a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">FORM</h5>
+                </div>
 
-<!-- end div wrapper to footer-->
+                <div class="addForm">
+                    <form method="POST">
+                        <label for="productCategory">Product Category:</label><br>
+                        <select id="productCategory" name="productCategory">
+                            <option value="Uniform">Uniform</option>
+                            <option value="ID">ID</option>
+                            <option value="Tela">Tela</option>
+                        </select>
+                        <br>
+                
+                        <label for="productName">Product Name:</label><br>
+                        <input type="text" id="productName" name="productName" required>
+                        <br>
+                
+                        <label for="description">Description:</label><br>
+                        <input type="text" id="description" name="description" required>
+                        <br>
+                
+                        <label for="stocks">Stocks:</label><br>
+                        <input type="number" id="stocks" name="stocks" required>
+                        <br>
+                
+                        <label for="price">Price:</label><br>
+                        <input type="number" id="price" name="price" required>
+                        <br>
+                
+                        <button type="submit">ADD</button>
+                    </form>
+                </div>
 
-<!-- include_once topbar/header -->
-<?php include_once 'topbar.php'; ?>
-<?php include_once '../pages/logoutAdmin.php'; ?>
-<!-- move end html tag to footer-->
+              </div>
 
-
-
-
-
-        
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    </body>
+</html>
