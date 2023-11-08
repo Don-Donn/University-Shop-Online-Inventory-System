@@ -7,6 +7,7 @@
     <title>University Shop</title>
 
     <!-- Custom fonts for this template-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Custom styles-->
     <link rel="stylesheet" href="../css/sidebar.css">
@@ -20,7 +21,7 @@
             <nav  id="sidebar">
                 <div class="brand-container">
                     <img id="spartanLlogo" src="../icons/redSpartan.png" alt="Logo" width="95" height="102" >
-                    <p class="univ-txt">University <br> Shop</p>
+                    <p class="univ-txt">University <br>Shop</p>
                 </div>
                 <ul>
 
@@ -31,25 +32,25 @@
 
                     <li class="nav-item">
                         <a class="nav-link" href="productInventory.php">
-                            <!-- i or icon link tag -->
+                            <i class="fa-solid fa-warehouse"></i>
                             <span>Product Inventory</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="transaction.php">
-                            <!-- i or icon link tag -->
-                            <span>Inventory History</span>
+                            <i class="fa-solid fa-clipboard-list fa-lg"></i>
+                            <span>Transaction</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="announcement.php">
-                            <!-- i or icon link tag -->
+                            <i class="fa-solid fa-bullhorn"></i>
                             <span>Announcement</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="accounts.php">
-                            <!-- i or icon link tag -->
+                            <i class="fa-solid fa-user"></i>
                             <span>Accounts</span>
                         </a>
                     </li>
@@ -57,7 +58,7 @@
 
 
                     <!-- Divider -->
-                    <br><br><br><br><br><br><br><br><br><br>
+                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                     <hr class="sidebar-divider" id="logout-hr">
 
                     <!-- Sidebar Toggler (Logout) -->

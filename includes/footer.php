@@ -12,15 +12,15 @@
                     position: fixed;
                     bottom: 0;
                     margin-left: 300px;
+                    padding-top: 5px;
+                    padding-bottom: 5px;
                     display:block;
-                    width: calc(100% - 300px);
-                    background: rgb(235, 235, 235);
+                    width: calc(100% - 292px);
+                    background: rgb(245, 245, 245);
                 }
                 .copyright{
                     color: maroon;
                     margin: 0;
-  
-
                     text-align: center;
                     
                 }

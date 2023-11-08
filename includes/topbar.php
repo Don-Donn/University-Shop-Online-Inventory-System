@@ -5,10 +5,10 @@
         <style>
             .topbar-header{
             margin: 0;
-            width: calc(100% - 300px);
+            width: calc(100% - 292px);
             margin-left: 300px;
             display:block;
-            background: rgb(235, 235, 235);
+            background: rgb(245, 245, 245);
             }
 
             .rgo-txt{
@@ -17,7 +17,7 @@
                 margin: 0;
                 padding: 27px;
                 text-align: center;
-                color: black;
+                color: maroon;
                 font-size: 30px;
                 font-weight: bold;
                 

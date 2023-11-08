@@ -24,6 +24,7 @@
 .univ-txt{
     display: inline-block;
     position: relative;
+    text-align: center;
     margin: 0;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
@@ -88,16 +89,16 @@ ul{
 
 #logout-hr{
     bottom: 60px;
-    border: .3px solid maroon; 
+    border: .1px solid gray; 
     margin: 15px;
     left:5;
-    opacity: 0.4;
+    opacity: 0.2;
 
 }
 
 .logout-btn{
     background-color: maroon;
-    padding: 5px 17px;
+    padding: 10px 20px;
     position: absolute;
     bottom: 100px;
     left: 34%;
