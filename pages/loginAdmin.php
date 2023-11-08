@@ -1,6 +1,7 @@
 <!--require session-->
 
 <?php
+    session_start();
     include("../includes/connection.php");
     if (isset($_POST['login_user'])){
         $useremail = $_POST['email'];
@@ -12,7 +13,8 @@
         if (mysqli_num_rows($result) == 1) {
             $row = mysqli_fetch_assoc($result);
             if ($row['User_Type'] == "Admin") {
-        
+
+                $_SESSION['user_id'] = $row['User_ID'];
                 header("Location: adminSide.php");
         } else {
         

@@ -29,13 +29,31 @@
       <div id="content">
             <header class="topbar-header">
                 <p class ="rgo-txt">RESOURCE GENERATION OFFICE </p>
+            <div class="welcome">
+            <?php
+                session_start();
+                include("../includes/connection.php");
+                if (isset($_SESSION['user_id'])) {
+                    $user_id = $_SESSION['user_id'];
+
+                    $query = "SELECT First_Name FROM user_data WHERE User_ID = $user_id";
+                    $result = mysqli_query($con, $query);
+
+                    if (mysqli_num_rows($result) == 1) {
+                        $row = mysqli_fetch_assoc($result);
+                        $first_name = $row['First_Name'];
+                        echo "<h1>Welcome Admin $first_name!</h1>";
+                    } else {
+                        echo "<h2>Welcome, Admin!</h2>";
+                    }
+                } else {
+                    header("Location: loginAdmin.php");
+                }
+            ?>
+            </div>
             </header>
-
-
             <!-- End of Topbar -->
     
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
-
-    

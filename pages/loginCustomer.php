@@ -8,12 +8,14 @@
         $useremail = $_POST['email'];
         $password = $_POST['password'];
 
-        $query = "SELECT * FROM user_login WHERE User_Email = '$useremail' AND User_Password = '$password'";
+        $query = "SELECT * FROM user_login WHERE User_Email = '$useremail'";
         $result = mysqli_query($con, $query);
         
         if (mysqli_num_rows($result) == 1) {
             $row = mysqli_fetch_assoc($result);
             if ($row['User_Type'] == "User") {
+                
+                $_SESSION['user_id'] = $row['User_ID'];
                 header("Location: userSide.php");
             }
          else {

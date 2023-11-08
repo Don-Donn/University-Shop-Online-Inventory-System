@@ -33,5 +33,3 @@ document.getElementById("logout-icon").addEventListener("click", function() {
     
 </body>
 </html>
-
-    
