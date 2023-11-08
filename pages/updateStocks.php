@@ -17,15 +17,15 @@ include'../includes/sidebar.php';
 
         .addForm{
         padding:15px;
-        padding-top:35px;
-        padding-bottom: 45px;
+        padding-top:40px;
+        padding-bottom: 65px;
         overflow: hidden;
         text-align: center;
 
         }
         form {
         display: inline-block;
-        width: 60%;
+        width: 500px;
         border: 1px solid #000;
         padding: 10px;
         text-align: center;
@@ -33,10 +33,10 @@ include'../includes/sidebar.php';
         }
         label{
         font-weight: bold;
-        font-size:x-large;
+        font-size:medium;
         }
         input{
-        font-size: large;
+        font-size: medium;
         }
 
         label, select, input {
@@ -48,17 +48,18 @@ include'../includes/sidebar.php';
         text-align: center;
         width: 43%;
         padding: 5px;
-        font-size: 18px;
+        font-size: 12px;
         line-height: 1.5;
         }
 
-        button {
+        .addButton {
         background-color: #007bff;
         color: #fff;
         padding: 10px 20px;
         border: none;
         cursor: pointer;
         }
+
 
     </style>
 
@@ -97,7 +98,7 @@ include'../includes/sidebar.php';
                 <br>
                 
                 
-                <button type="UPDATE">ADD</button>
+                <button class="addButton" type="UPDATE">ADD</button>
             </form>
         </div>
 
