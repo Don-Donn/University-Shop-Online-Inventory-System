@@ -25,6 +25,7 @@
     display: inline-block;
     position: relative;
     text-align: center;
+    vertical-align: middle;
     margin: 0;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-weight: bold;
