@@ -16,9 +16,9 @@ include'../includes/sidebar.php';
 
 
         .addForm{
-        padding:0px;
-        padding-top:20px;
-        padding-bottom: 45px;
+        padding:15px;
+        padding-top:40px;
+        padding-bottom: 65px;
         overflow: hidden;
         text-align: center;
 
@@ -44,7 +44,7 @@ include'../includes/sidebar.php';
         margin-bottom: 10px;
         }
 
-        select, input[type="text"], input[type="number"], input[type="file"] {
+        select, input[type="text"], input[type="number"] {
         text-align: center;
         width: 43%;
         padding: 5px;
@@ -60,6 +60,7 @@ include'../includes/sidebar.php';
         cursor: pointer;
         }
 
+
     </style>
 
     <!--Start transaction.php content -->
@@ -67,10 +68,10 @@ include'../includes/sidebar.php';
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="true" href="transaction.php">ADD PRODUCT</a>
+                    <a class="nav-link" href="transaction.php">ADD PRODUCT</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="updateStocks.php">UPDATE STOCKS</a>
+                    <a class="nav-link active" aria-current="true" href="updateStocks.php">UPDATE STOCKS</a>
                 </li>
             </ul>
         </div>
@@ -78,7 +79,7 @@ include'../includes/sidebar.php';
             <form method="POST">
                 <label for="productCategory">Product Category:</label><br>
                 <select id="productCategory" name="productCategory">
-                    <option value="Uniform">Uniform</option>
+                <option value="Uniform">Uniform</option>
                     <option value="ID">ID</option>
                     <option value="Textile">Textile</option>
                     <option value="Textile">Dept Shirt</option>
@@ -96,18 +97,12 @@ include'../includes/sidebar.php';
                 <input type="text" id="description" name="description" required>
                 <br>
                 
-                <label for="stocks">Stocks:</label><br>
+                <label for="stocks">Stocks Sold:</label><br>
                 <input type="number" id="stocks" name="stocks" required>
                 <br>
                 
-                <label for="price">Price:</label><br>
-                <input type="number" id="price" name="price" required>
-                <br>
-
-                <label for="file">Product Image:</label>
-                <input type="file" name="file" id="file" accept=".png, .jpeg, .jpg" required><br>
                 
-                <button class="addButton" type="submit">ADD</button>
+                <button class="addButton" type="UPDATE">ADD</button>
             </form>
         </div>
 

@@ -1,14 +1,15 @@
 
    <!-- div for Content Wrapper of top bar-->
         <!-- div for Main Content of topbar -->
-    <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content-wrapper">
         <style>
             .topbar-header{
             margin: 0;
-            width: calc(100% - 292px);
-            margin-left: 300px;
+            width: calc(100% - 307px);
+            margin-left: 307px;
             display:block;
             background: rgb(245, 245, 245);
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
             }
 
             .rgo-txt{
@@ -22,6 +23,11 @@
                 font-weight: bold;
                 
             }
+            .container-fluid{
+                padding:0;
+                padding-top:5px;
+            }
+
 
         </style>
 
@@ -42,9 +48,9 @@
                     if (mysqli_num_rows($result) == 1) {
                         $row = mysqli_fetch_assoc($result);
                         $first_name = $row['First_Name'];
-                        echo "<h1>Welcome Admin $first_name!</h1>";
+                        echo "<h4>Welcome Admin $first_name!</h4>";
                     } else {
-                        echo "<h2>Welcome, Admin!</h2>";
+                        echo "<h5>Welcome, Admin!</h5>";
                     }
                 } else {
                     header("Location: loginAdmin.php");
