@@ -102,7 +102,7 @@ include'../includes/sidebar.php';
                 <br>
                 
                 
-                <button class="addButton" type="UPDATE">ADD</button>
+                <button class="addButton" type="submit" name="addButton">ADD</button>
             </form>
         </div>
 

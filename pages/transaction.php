@@ -104,10 +104,22 @@ include'../includes/sidebar.php';
                 <input type="number" id="price" name="price" required>
                 <br>
 
+                <label for="transaction">Transaction NO:</label><br>
+                <input type="number" id="transaction" name="transaction" required>
+                <br>
+
+                <label for="employee">Employee Name:</label><br>
+                <input type="text" id="employee" name="employee" required>
+                <br>
+
+                <label for="date">Date:</label><br>
+                <input type="date" id="date" name="date" required>
+                <br>
+
                 <label for="file">Product Image:</label>
                 <input type="file" name="file" id="file" accept=".png, .jpeg, .jpg" required><br>
                 
-                <button class="addButton" type="submit">ADD</button>
+                <button class="addButton" type="submit" name="addproduct" >ADD</button>
             </form>
         </div>
 
@@ -118,3 +130,45 @@ include'../includes/sidebar.php';
 <?php
 include'../includes/footer.php';
 ?>
+
+<?php
+include("../includes/connection.php");
+if ($con->connect_error) {
+    die("Connection failed: " . $con->connect_error);
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $productCategory = $_POST['productCategory'];
+    $productName = $_POST['productName'];
+    $description = $_POST['description'];
+    $stocks = $_POST['stocks'];
+    $price = $_POST['price'];
+    $transactionNo = $_POST['transaction'];
+    $employeeName = $_POST['employee'];
+    $date = $_POST['date'];
+
+    $filename = $_FILES['file']['name'];
+    $fileSize = $_FILES['file']['size'];
+    $source_path=$_FILES['file']['tmp_name'];
+    $imageExtension = explode('.',$filename);
+    $imageExtension = strtolower(end($imageExtension));
+
+    if($fileSize > 10000000){
+        echo "<script> alert('File is too large') </script>";
+    }else{
+        $newImage = uniqid();
+        $newImage .= '.' . $imageExtension;
+
+        move_uploaded_file($source_path,'Icons/'.$newImage);
+        $sql = "INSERT INTO add_stocks (Category_Name, Product_Name, Description, Quantity, Price, Transaction_No, Employee_Name, Date, image)
+                VALUES ('$productCategory', '$productName', '$description', '$stocks', '$price', '$transactionNo', '$employeeName', '$date', '$newImage')";
+        $result = mysqli_query($con, $sql);
+        if ($result) {
+            echo "<script>alert('Product has been inserted successfully!')</script>";
+        }
+    }
+}
+$conn->close();
+?>
+
+

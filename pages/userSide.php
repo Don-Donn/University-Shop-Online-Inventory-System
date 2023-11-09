@@ -5,7 +5,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
     <link rel="stylesheet" href="../css/userSide.css">
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 
 
@@ -55,6 +55,7 @@
     <table class="product-table" >
     <thead>
         <tr>
+            <th scope="col">Image</th>
             <th scope="col">Product</th>
             <th scope="col">Size</th>
             <th scope="col">Stock(s)</th>
@@ -68,26 +69,50 @@
         if ($con->connect_error) {
             die("Connection failed: " . $con->connect_error);
         }
-        $sql = "SELECT Product_Name, Product_Description, Product_Quantity, Product_Price FROM product";
+        $sql = "SELECT image, Product_Name, Description, Quantity, Price FROM add_stocks";
         $result = $con->query($sql);
+
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>";
+                    echo "<td><img src='../Icons/" .$row["image"] . "' alt='Image not available'></td>";
                     echo "<td>" . $row["Product_Name"] . "</td>";
-                    echo "<td>" . $row["Product_Description"] . "</td>";
-                    echo "<td>" . $row["Product_Quantity"] . "</td>";
-                    echo "<td>" . $row["Product_Price"] . "</td>";
+                    echo "<td>" . $row["Description"] . "</td>";
+                    echo "<td>" . $row["Quantity"] . "</td>";
+                    echo "<td>" . $row["Price"] . "</td>";
                     echo "</tr>";
                 }
             } else {
                 echo "<tr><td colspan='4'>N/A</td></tr>";
             }
             $con->close();
-
-
         ?>
     </table>
-    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.3.2/dist/sweetalert2.all.min.js"></script>
+    <?php
+    include("../includes/connection.php");
+
+    $sql = "SELECT announcement FROM announcement";
+    $result = $con->query($sql);
+
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            echo '<script>
+                Swal.fire({
+                    title: "Announcement",
+                    text: "' . $row["announcement"] . '",
+                    icon: "info",
+                    confirmButtonText: "Okay"
+                }).then((result) => {
+                    if (result.isConfirmed) {   
+                        window.location = "userSide.php";
+                    }
+                });
+            </script>';
+        }
+    }
+    $con->close();
+    ?>
 </body>
 </html>
 <?php include_once 'logoutUser.php'; ?>

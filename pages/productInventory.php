@@ -36,8 +36,30 @@ include'../includes/sidebar.php';
                    </tr>
                </thead>
                 <tbody>
-                    <!-- Content for tbody or td -->
-                </tbody>
+                <?php
+                    include("../includes/connection.php");
+
+                    if ($con->connect_error) {
+                        die("Connection failed: " . $con->connect_error);
+                    }
+                    $sql = "SELECT Category_Name, Product_Name, Description, Quantity, Price FROM add_stocks";
+                    $result = $con->query($sql);
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<tr>";
+                                echo "<td>" .$row["Category_Name"] . "</td>";
+                                echo "<td>" . $row["Product_Name"] . "</td>";
+                                echo "<td>" . $row["Description"] . "</td>";
+                                echo "<td>" . $row["Quantity"] . "</td>";
+                                echo "<td>" . $row["Price"] . "</td>";
+                                echo "</tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='4'>N/A</td></tr>";
+                        }
+                        $con->close();
+                    ?>
+                  </tbody>
                             
                 </table>
                         
