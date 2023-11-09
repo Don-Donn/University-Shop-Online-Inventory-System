@@ -79,9 +79,13 @@ include'../includes/sidebar.php';
             <form method="POST">
                 <label for="productCategory">Product Category:</label><br>
                 <select id="productCategory" name="productCategory">
-                    <option value="Uniform">Uniform</option>
+                <option value="Uniform">Uniform</option>
                     <option value="ID">ID</option>
-                    <option value="Tela">Tela</option>
+                    <option value="Textile">Textile</option>
+                    <option value="Textile">Dept Shirt</option>
+                    <option value="Textile">Merchandise</option>
+                    <option value="Textile">Hygiene</option>
+                    <option value="Textile">School Supply</option>
                 </select>
                 <br>
                 

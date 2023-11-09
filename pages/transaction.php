@@ -44,7 +44,7 @@ include'../includes/sidebar.php';
         margin-bottom: 10px;
         }
 
-        select, input[type="text"], input[type="number"] {
+        select, input[type="text"], input[type="number"], input[type="file"] {
         text-align: center;
         width: 43%;
         padding: 5px;
@@ -80,7 +80,11 @@ include'../includes/sidebar.php';
                 <select id="productCategory" name="productCategory">
                     <option value="Uniform">Uniform</option>
                     <option value="ID">ID</option>
-                    <option value="Tela">Tela</option>
+                    <option value="Textile">Textile</option>
+                    <option value="Textile">Dept Shirt</option>
+                    <option value="Textile">Merchandise</option>
+                    <option value="Textile">Hygiene</option>
+                    <option value="Textile">School Supply</option>
                 </select>
                 <br>
                 
@@ -99,6 +103,9 @@ include'../includes/sidebar.php';
                 <label for="price">Price:</label><br>
                 <input type="number" id="price" name="price" required>
                 <br>
+
+                <label for="file">Product Image:</label>
+                <input type="file" name="file" id="file" accept=".png, .jpeg, .jpg" required><br>
                 
                 <button class="addButton" type="submit">ADD</button>
             </form>
