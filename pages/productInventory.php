@@ -55,7 +55,7 @@ include'../includes/sidebar.php';
                                 echo "</tr>";
                             }
                         } else {
-                            echo "<tr><td colspan='4'>N/A</td></tr>";
+                            echo "<tr><td colspan='4'></td></tr>";
                         }
                         $con->close();
                     ?>

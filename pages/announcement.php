@@ -143,7 +143,7 @@ include'../includes/sidebar.php';
                         outputTextarea.removeAttribute('readonly');
                         outputTextarea.focus();
                     });
-                </script>
+                </script> 
             </div>
     
     <!--End of announcement.php content -->
