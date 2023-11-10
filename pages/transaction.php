@@ -70,7 +70,7 @@ include'../includes/sidebar.php';
                     <a class="nav-link active" aria-current="true" href="transaction.php">ADD PRODUCT</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="updateStocks.php">UPDATE STOCKS</a>
+                    <a class="nav-link" href="outStocks.php">OUT STOCKS</a>
                 </li>
             </ul>
         </div>
@@ -81,10 +81,10 @@ include'../includes/sidebar.php';
                     <option value="Uniform">Uniform</option>
                     <option value="ID">ID</option>
                     <option value="Textile">Textile</option>
-                    <option value="Textile">Dept Shirt</option>
-                    <option value="Textile">Merchandise</option>
-                    <option value="Textile">Hygiene</option>
-                    <option value="Textile">School Supply</option>
+                    <option value="Dept Shirt">Dept Shirt</option>
+                    <option value="Merchandise">Merchandise</option>
+                    <option value="Hygiene">Hygiene</option>
+                    <option value="School Supply">School Supply</option>
                 </select>
                 <br>
                 
@@ -104,16 +104,87 @@ include'../includes/sidebar.php';
                 <input type="number" id="price" name="price" required>
                 <br>
 
+                <label for="transaction">Transaction NO:</label><br>
+                <input type="number" id="transaction" name="transaction" required>
+                <br>
+
+                <label for="employee">Employee Name:</label><br>
+                <input type="text" id="employee" name="employee" required>
+                <br>
+
+                <label for="date">Date:</label><br>
+                <input type="date" id="date" name="date" required>
+                <br>
+
                 <label for="file">Product Image:</label>
                 <input type="file" name="file" id="file" accept=".png, .jpeg, .jpg" required><br>
                 
-                <button class="addButton" type="submit">ADD</button>
+                <button class="addButton" type="submit" name="addproduct" >ADD</button>
             </form>
         </div>
 
     </div>
     
     <!--End of transaction.php content -->
+
+<?php
+include("../includes/connection.php");
+if ($con->connect_error) {
+    die("Connection failed: " . $con->connect_error);
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $productCategory = $_POST['productCategory'];
+    $productName = $_POST['productName'];
+    $description = $_POST['description'];
+    $stocks = $_POST['stocks'];
+    $price = $_POST['price'];
+    $transactionNo = $_POST['transaction'];
+    $employeeName = $_POST['employee'];
+    $date = $_POST['date'];
+
+    $filename = $_FILES['file']['name'];
+    $fileSize = $_FILES['file']['size'];
+    $source_path = $_FILES['file']['tmp_name'];
+    $imageExtension = explode('.', $filename);
+    $imageExtension = strtolower(end($imageExtension));
+
+    // Check if the file is uploaded successfully
+    if ($_FILES['file']['error'] == UPLOAD_ERR_OK) {
+        $newImage = uniqid();
+        $newImage .= '.' . $imageExtension;
+
+        $targetPath = __DIR__ . '/../Images/' . $newImage;
+
+        if (move_uploaded_file($source_path, $targetPath)) {
+            // File uploaded successfully
+            echo "<script>alert('File uploaded successfully')</script>";
+        } else {
+            // Error uploading file
+            echo "<script>alert('Error uploading file')</script>";
+            // Check the PHP error for more details
+            echo "<script>console.log('PHP Error:', " . json_encode(error_get_last()) . ")</script>";
+        }
+    } else {
+        // File upload error
+        echo "<script>alert('File upload error: " . $_FILES['file']['error'] . "')</script>";
+    }
+
+        $sql = "INSERT INTO add_stocks (Category_Name, Product_Name, Description, Quantity, Price, Transaction_No, Employee_Name, Date, image)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param("sssiissss", $productCategory, $productName, $description, $stocks, $price, $transactionNo, $employeeName, $date, $newImage);
+        $stmt->execute();
+
+        if ($stmt->affected_rows > 0) {
+            echo "<script>alert('Product has been inserted successfully!')</script>";
+        } else {
+            echo "<script>alert('Error inserting product')</script>";
+        }
+
+        $stmt->close();
+    }
+?>
 
 <?php
 include'../includes/footer.php';

@@ -56,6 +56,60 @@ include'../includes/sidebar.php';
     <!--Start announcement.php content -->
     <div class="announcement">
                 <!-- ADMIN TABLE -->
+
+
+                    <?php
+                    // Check connection
+                    if ($con->connect_error) {
+                        die("Connection failed: " . $con->connect_error);
+                    }
+                    $announcement = "";
+                    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                        if (isset($_POST['postButton'])) {
+                            $announcement = $_POST['inputText'];
+
+                            $sql = "INSERT INTO announcement (announcement) VALUES ('$announcement')";
+                            $result = $con->query($sql);
+
+                            if ($result) {
+                                echo "<script>alert('Announcement Posted!')</script>";
+                            }
+                        } else if (isset($_POST['saveButton'])) {
+                            $announcement = $_POST['outputTextarea'];
+
+                            $sql = "UPDATE announcement SET announcement = '$announcement' WHERE id='1'";
+                            $result = $con->query($sql);
+
+                            if ($result) {
+                                echo "<script>alert('Announcement Updated!')</script>";
+                            }
+                        } else if (isset($_POST['clearButton'])) {
+                            $announcement = "";
+
+                            $sql = "UPDATE announcement SET announcement = '$announcement'";
+                            $result = $con->query($sql);
+
+                            if ($result) {
+                                echo "<script>alert('Announcement Cleared!')</script>";
+                            }
+                        }
+                    }
+                    
+                    // Select the announcement from the database
+                    $sql = "SELECT * FROM announcement";
+                    $result = $con->query($sql);
+
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            $announcement = $row['announcement'];
+                        }
+                    } else {
+                        $announcement = "";
+                    }
+
+                    $con->close();
+                    ?>
+
                 <div class="formA">
                     <div class="card-header">
                       ANNOUNCEMENT
@@ -66,7 +120,7 @@ include'../includes/sidebar.php';
                             <button class="annButton" type="submit" name="postButton">POST</button>
                         </form>
                     </div>
-                </div>
+            </div>
 
 
                 <div class="formB">
@@ -75,13 +129,21 @@ include'../includes/sidebar.php';
                     </div>
                     <div class="output-form">
                         <form method="post">
-                            <textarea name="outputText" rows="10" cols="37" id="outputTextarea" readonly></textarea><br>
+                            <textarea name="outputTextarea" id="outputTextarea" rows="10" cols="37" readonly><?php echo $announcement; ?></textarea><br>
                             <button class="annButton" type="button" name="editButton" id="editButton">Edit</button>
                             <button class="annButton" type="submit" name="saveButton">Save</button>
                             <button class="annButton" type="submit" name="clearButton">Clear</button>
+                            <input type="submit" name="submit" value="Update" style="display: none;">
+                        </form>
                     </div>
                 </div>
-
+                <script>
+                    document.getElementById('editButton').addEventListener('click', function() {
+                        var outputTextarea = document.getElementById('outputTextarea');
+                        outputTextarea.removeAttribute('readonly');
+                        outputTextarea.focus();
+                    });
+                </script> 
             </div>
     
     <!--End of announcement.php content -->

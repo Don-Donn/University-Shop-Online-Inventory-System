@@ -37,6 +37,7 @@
                 <p class ="rgo-txt">RESOURCE GENERATION OFFICE </p>
             <div class="welcome">
             <?php
+                error_reporting(0);
                 session_start();
                 include("../includes/connection.php");
                 if (isset($_SESSION['user_id'])) {

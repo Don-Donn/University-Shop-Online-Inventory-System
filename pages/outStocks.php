@@ -71,7 +71,7 @@ include'../includes/sidebar.php';
                     <a class="nav-link" href="transaction.php">ADD PRODUCT</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="true" href="updateStocks.php">UPDATE STOCKS</a>
+                    <a class="nav-link active" aria-current="true" href="outStocks.php">OUT STOCKS</a>
                 </li>
             </ul>
         </div>
@@ -82,10 +82,10 @@ include'../includes/sidebar.php';
                 <option value="Uniform">Uniform</option>
                     <option value="ID">ID</option>
                     <option value="Textile">Textile</option>
-                    <option value="Textile">Dept Shirt</option>
-                    <option value="Textile">Merchandise</option>
-                    <option value="Textile">Hygiene</option>
-                    <option value="Textile">School Supply</option>
+                    <option value="Dept Shirt">Dept Shirt</option>
+                    <option value="Merchandise">Merchandise</option>
+                    <option value="Hygiene">Hygiene</option>
+                    <option value="School Supply">School Supply</option>
                 </select>
                 <br>
                 
@@ -102,7 +102,7 @@ include'../includes/sidebar.php';
                 <br>
                 
                 
-                <button class="addButton" type="UPDATE">ADD</button>
+                <button class="addButton" type="submit" name="addButton">UPDATE</button>
             </form>
         </div>
 
