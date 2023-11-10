@@ -5,8 +5,8 @@
         <style>
             .topbar-header{
             margin: 0;
-            width: calc(100% - 307px);
-            margin-left: 307px;
+            width: calc(100% - 305px);
+            margin-left: 305px;
             display:block;
             background: rgb(245, 245, 245);
             box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
