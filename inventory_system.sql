@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 31, 2023 at 05:09 AM
+-- Generation Time: Nov 10, 2023 at 08:30 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -29,32 +29,34 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `add_stocks` (
   `Product_ID` int(100) NOT NULL,
+  `Category_Name` varchar(100) NOT NULL,
   `Product_Name` varchar(100) NOT NULL,
   `Description` varchar(100) NOT NULL,
   `Price` int(50) NOT NULL,
   `Quantity` int(50) NOT NULL,
   `Transaction_No` int(50) NOT NULL,
   `Employee_Name` varchar(10) NOT NULL,
-  `Date` date NOT NULL
+  `Date` date NOT NULL,
+  `image` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `add_stocks`
+--
+
+INSERT INTO `add_stocks` (`Product_ID`, `Category_Name`, `Product_Name`, `Description`, `Price`, `Quantity`, `Transaction_No`, `Employee_Name`, `Date`, `image`) VALUES
+(1, 'Uniform', 'Polo', 'Large', 350, 15, 1, 'Juan Tamad', '2023-11-10', '654dda55176fe.');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `category`
+-- Table structure for table `announcement`
 --
 
-CREATE TABLE `category` (
-  `Category_ID` int(100) NOT NULL,
-  `Category_Name` varchar(100) NOT NULL
+CREATE TABLE `announcement` (
+  `id` int(50) NOT NULL,
+  `announcement` varchar(10000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `category`
---
-
-INSERT INTO `category` (`Category_ID`, `Category_Name`) VALUES
-(1, 'Uniform');
 
 -- --------------------------------------------------------
 
@@ -70,28 +72,6 @@ CREATE TABLE `out_stocks` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product`
---
-
-CREATE TABLE `product` (
-  `Product_ID` int(100) NOT NULL,
-  `Product_Name` varchar(100) DEFAULT NULL,
-  `Product_Description` varchar(100) DEFAULT NULL,
-  `Product_Price` int(50) NOT NULL,
-  `Product_Quantity` int(50) NOT NULL,
-  `Category_ID` int(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `product`
---
-
-INSERT INTO `product` (`Product_ID`, `Product_Name`, `Product_Description`, `Product_Price`, `Product_Quantity`, `Category_ID`) VALUES
-(3, 'Polo', 'Medium', 0, 25, 1);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `user_data`
 --
 
@@ -103,6 +83,15 @@ CREATE TABLE `user_data` (
   `User_Type` varchar(100) DEFAULT NULL,
   `Classification` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_data`
+--
+
+INSERT INTO `user_data` (`User_ID`, `User_Code`, `Last_Name`, `First_Name`, `User_Type`, `Classification`) VALUES
+(3, '1234', 'Tatum', 'Jason', 'Admin', 'RGO Staff'),
+(4, 'umay', 'Sagan', 'Peter', 'User', 'Student'),
+(5, 'kimi', 'Chu', 'Kimi', 'Admin', 'RGO Staff');
 
 -- --------------------------------------------------------
 
@@ -123,7 +112,8 @@ CREATE TABLE `user_login` (
 
 INSERT INTO `user_login` (`User_ID`, `User_Type`, `User_Email`, `User_Password`) VALUES
 (3, 'Admin', '1234@g.batstate-u.edu.ph', 'admin'),
-(4, 'User', 'umay@g.batstate-u.edu.ph', 'umay');
+(4, 'User', 'umay@g.batstate-u.edu.ph', 'umay'),
+(5, 'Admin', 'kimi@g.batstate-u.edu.ph', 'admin');
 
 --
 -- Indexes for dumped tables
@@ -136,23 +126,16 @@ ALTER TABLE `add_stocks`
   ADD PRIMARY KEY (`Product_ID`);
 
 --
--- Indexes for table `category`
+-- Indexes for table `announcement`
 --
-ALTER TABLE `category`
-  ADD PRIMARY KEY (`Category_ID`);
+ALTER TABLE `announcement`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `out_stocks`
 --
 ALTER TABLE `out_stocks`
   ADD PRIMARY KEY (`Product_ID`);
-
---
--- Indexes for table `product`
---
-ALTER TABLE `product`
-  ADD PRIMARY KEY (`Product_ID`),
-  ADD KEY `Category_ID` (`Category_ID`);
 
 --
 -- Indexes for table `user_data`
@@ -174,13 +157,13 @@ ALTER TABLE `user_login`
 -- AUTO_INCREMENT for table `add_stocks`
 --
 ALTER TABLE `add_stocks`
-  MODIFY `Product_ID` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `Product_ID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `category`
+-- AUTO_INCREMENT for table `announcement`
 --
-ALTER TABLE `category`
-  MODIFY `Category_ID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `announcement`
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `out_stocks`
@@ -189,32 +172,16 @@ ALTER TABLE `out_stocks`
   MODIFY `Product_ID` int(100) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `product`
---
-ALTER TABLE `product`
-  MODIFY `Product_ID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
 -- AUTO_INCREMENT for table `user_data`
 --
 ALTER TABLE `user_data`
-  MODIFY `User_ID` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `User_ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user_login`
 --
 ALTER TABLE `user_login`
-  MODIFY `User_ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `product`
---
-ALTER TABLE `product`
-  ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`Category_ID`) REFERENCES `category` (`Category_ID`);
+  MODIFY `User_ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
