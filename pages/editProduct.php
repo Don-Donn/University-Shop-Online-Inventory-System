@@ -68,10 +68,10 @@ include'../includes/sidebar.php';
             <ul class="nav nav-tabs card-header-tabs">
                 <!--add prod, add stocks, out stocks ,edit-->
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="true" style="color: white; background-color: maroon; font-weight: bold;" href="transaction.php">ADD PRODUCT</a>
+                    <a class="nav-link"  href="transaction.php">ADD PRODUCT</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="editProduct.php">EDIT PRODUCT</a>
+                    <a class="nav-link active" aria-current="true" style="color: white; background-color: maroon; font-weight: bold;" href="editProduct.php">EDIT PRODUCT</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="addStocks.php">ADD STOCKS</a>
@@ -103,30 +103,14 @@ include'../includes/sidebar.php';
                 <input type="text" id="description" name="description" required>
                 <br>
                 
-                <label for="stocks">Stocks:</label><br>
-                <input type="number" id="stocks" name="stocks" required>
-                <br>
-                
                 <label for="price">Price:</label><br>
                 <input type="number" id="price" name="price" required>
-                <br>
-
-                <label for="transaction">Transaction NO:</label><br>
-                <input type="number" id="transaction" name="transaction" required>
-                <br>
-
-                <label for="employee">Employee Name:</label><br>
-                <input type="text" id="employee" name="employee" required>
-                <br>
-
-                <label for="date">Date:</label><br>
-                <input type="date" id="date" name="date" required>
                 <br>
 
                 <label for="file">Product Image:</label>
                 <input type="file" name="file" id="file" accept=".png, .jpeg, .jpg" required><br>
                 
-                <button class="addButton" type="submit" name="addproduct" >ADD</button>
+                <button class="addButton" type="submit" name="addproduct" >SAVE</button>
             </form>
         </div>
 

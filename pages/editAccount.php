@@ -68,45 +68,32 @@ include'../includes/sidebar.php';
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
-                    <a class="nav-link" href="transaction.php">ADD PRODUCT</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="editProduct.php">EDIT PRODUCT</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="addStocks.php">ADD STOCKS</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="true" style="color: white; background-color: maroon; font-weight: bold;" href="outStocks.php">OUT STOCKS</a>
+                    <a class="nav-link active" aria-current="true" style="color: white; background-color: maroon; font-weight: bold;" href="outStocks.php">EDIT ACCOUNT</a>
                 </li>             
             </ul>
         </div>
         <div class="addForm">
             <form method="POST">
-                <label for="productCategory">Product Category:</label><br>
-                <select id="productCategory" name="productCategory">
-                <option value="Uniform">Uniform</option>
-                    <option value="ID">ID</option>
-                    <option value="Textile">Textile</option>
-                    <option value="Dept Shirt">Dept Shirt</option>
-                    <option value="Merchandise">Merchandise</option>
-                    <option value="Hygiene">Hygiene</option>
-                    <option value="School Supply">School Supply</option>
-                </select>
+                
+                <label for="accountEmail">Email:</label><br>
+                <input type="text" id="accountEmail" name="accountEmail" required>
                 <br>
                 
-                <label for="productName">Product Name:</label><br>
-                <input type="text" id="productName" name="productName" required>
+                <label for="accountName">Name:</label><br>
+                <input type="text" id="accountName" name="accountName" required>
                 <br>
                 
-                <label for="description">Description:</label><br>
-                <input type="text" id="description" name="description" required>
+                <label for="accPassword">Current Password:</label><br>
+                <input type="number" id="accPassword" name="accPassword" required>
                 <br>
-                
-                <label for="stocks">Stocks Sold:</label><br>
-                <input type="number" id="stocks" name="stocks" required>
+
+                <label for="newPassword">New Password:</label><br>
+                <input type="number" id="newPassword" name="newPassword" required>
                 <br>
-                
+
+                <label for="retypePass">Confirm New Password:</label><br>
+                <input type="number" id="retypePass" name="retypePass" required>
+                <br>               
                 
                 <button class="addButton" type="submit" name="addButton">UPDATE</button>
             </form>
