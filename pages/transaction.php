@@ -82,7 +82,7 @@ include'../includes/sidebar.php';
             </ul>
         </div>
         <div class="addForm">
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
                 <label for="productCategory">Product Category:</label><br>
                 <select id="productCategory" name="productCategory">
                     <option value="Uniform">Uniform</option>
@@ -156,7 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $imageExtension = explode('.', $filename);
     $imageExtension = strtolower(end($imageExtension));
 
-    // Check if the file is uploaded successfully
+
     if ($_FILES['file']['error'] == UPLOAD_ERR_OK) {
         $newImage = uniqid();
         $newImage .= '.' . $imageExtension;
@@ -164,16 +164,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $targetPath = __DIR__ . '/../Images/' . $newImage;
 
         if (move_uploaded_file($source_path, $targetPath)) {
-            // File uploaded successfully
+
             echo "<script>alert('File uploaded successfully')</script>";
         } else {
-            // Error uploading file
+
             echo "<script>alert('Error uploading file')</script>";
-            // Check the PHP error for more details
+
             echo "<script>console.log('PHP Error:', " . json_encode(error_get_last()) . ")</script>";
         }
     } else {
-        // File upload error
+
         echo "<script>alert('File upload error: " . $_FILES['file']['error'] . "')</script>";
     }
 
