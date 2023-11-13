@@ -74,10 +74,10 @@ include'../includes/sidebar.php';
                     <a class="nav-link" href="editProduct.php">EDIT PRODUCT</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="addStocks.php">ADD STOCKS</a>
+                    <a class="nav-link active" aria-current="true" style="color: white; background-color: maroon; font-weight: bold;" href="addStocks.php">ADD STOCKS</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="true" style="color: white; background-color: maroon; font-weight: bold;" href="outStocks.php">OUT STOCKS</a>
+                    <a class="nav-link" href="outStocks.php">OUT STOCKS</a>
                 </li>             
             </ul>
         </div>
@@ -103,12 +103,12 @@ include'../includes/sidebar.php';
                 <input type="text" id="description" name="description" required>
                 <br>
                 
-                <label for="stocks">Stocks Sold:</label><br>
+                <label for="stocks">Quantity:</label><br>
                 <input type="number" id="stocks" name="stocks" required>
                 <br>
                 
                 
-                <button class="addButton" type="submit" name="addButton">UPDATE</button>
+                <button class="addButton" type="submit" name="addButton">ADD</button>
             </form>
         </div>
 
