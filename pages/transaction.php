@@ -177,22 +177,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "<script>alert('File upload error: " . $_FILES['file']['error'] . "')</script>";
     }
 
-        $sql = "INSERT INTO add_stocks (Category_Name, Product_Name, Description, Quantity, Price, Transaction_No, Employee_Name, Date, image)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        $stmt = $con->prepare($sql);
-        $stmt->bind_param("sssiissss", $productCategory, $productName, $description, $stocks, $price, $transactionNo, $employeeName, $date, $newImage);
-        $stmt->execute();
+    $sqlstocks = "INSERT INTO add_stocks (Category_Name, Product_Name, Description, Quantity, Price, image)
+    VALUES (?, ?, ?, ?, ?, ?)";
 
-        if ($stmt->affected_rows > 0) {
-            echo "<script>alert('Product has been inserted successfully!')</script>";
-        } else {
-            echo "<script>alert('Error inserting product')</script>";
-        }
+    $stmtstocks = $con->prepare($sqlstocks);
+    $stmtstocks->bind_param("sssiss", $productCategory, $productName, $description, $stocks, $price, $newImage);
+    $stmtstocks->execute();
 
-        $stmt->close();
+    if ($stmtstocks->affected_rows > 0) {
+        echo "<script>alert('Product added to add_stocks table successfully!')</script>";
+    } else {
+        echo "<script>alert('Error inserting product into add_stocks table: " . $stmtstocks->error . "')</script>";
     }
-?>
 
+    $stmtstocks->close();
+
+    // Insert data into the 'transaction' table
+    $sqltransaction = "INSERT INTO transaction (Transaction_No, Employee_Name, Date)
+        VALUES (?, ?, ?)";
+
+    $stmttrans = $con->prepare($sqltransaction);
+    $stmttrans->bind_param("iss", $transactionNo, $employeeName, $date);
+    $stmttrans->execute();
+
+    if ($stmttrans->affected_rows > 0) {
+        echo "<script>alert('Transaction data added to transaction table successfully!')</script>";
+    } else {
+        echo "<script>alert('Error inserting transaction data: " . $stmttrans->error . "')</script>";
+    }
+    $stmttrans->close();
+    $stmttrans->close();
+    }
+    $con->close();
+?>
 <?php
 include'../includes/footer.php';
 ?>

@@ -61,7 +61,6 @@ include'../includes/sidebar.php';
         }
 
     </style>
-
     <!--Start transaction.php content -->
     <div class="cardProduct">
         <div class="card-header">
@@ -83,20 +82,8 @@ include'../includes/sidebar.php';
         </div>
         <div class="addForm">
             <form method="POST">
-                <label for="productCategory">Product Category:</label><br>
-                <select id="productCategory" name="productCategory">
-                    <option value="Uniform">Uniform</option>
-                    <option value="ID">ID</option>
-                    <option value="Textile">Textile</option>
-                    <option value="Dept Shirt">Dept Shirt</option>
-                    <option value="Merchandise">Merchandise</option>
-                    <option value="Hygiene">Hygiene</option>
-                    <option value="School Supply">School Supply</option>
-                </select>
-                <br>
-                
-                <label for="productName">Product Name:</label><br>
-                <input type="text" id="productName" name="productName" required>
+                <label for="productID">Product ID:</label><br>
+                <input type="number" id="productID" name="productID" required>
                 <br>
                 
                 <label for="description">Description:</label><br>
@@ -106,11 +93,8 @@ include'../includes/sidebar.php';
                 <label for="price">Price:</label><br>
                 <input type="number" id="price" name="price" required>
                 <br>
-
-                <label for="file">Product Image:</label>
-                <input type="file" name="file" id="file" accept=".png, .jpeg, .jpg" required><br>
                 
-                <button class="addButton" type="submit" name="addproduct" >SAVE</button>
+                <button class="addButton" type="submit" name="editproduct" >SAVE</button>
             </form>
         </div>
 
@@ -120,62 +104,35 @@ include'../includes/sidebar.php';
 
 <?php
 include("../includes/connection.php");
+
 if ($con->connect_error) {
     die("Connection failed: " . $con->connect_error);
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $productCategory = $_POST['productCategory'];
-    $productName = $_POST['productName'];
+    $productId = $_POST['productID'];
     $description = $_POST['description'];
-    $stocks = $_POST['stocks'];
     $price = $_POST['price'];
-    $transactionNo = $_POST['transaction'];
-    $employeeName = $_POST['employee'];
-    $date = $_POST['date'];
+    // Add other fields as needed
 
-    $filename = $_FILES['file']['name'];
-    $fileSize = $_FILES['file']['size'];
-    $source_path = $_FILES['file']['tmp_name'];
-    $imageExtension = explode('.', $filename);
-    $imageExtension = strtolower(end($imageExtension));
+    // Update the product details in the database
+    $sql = "UPDATE add_stocks SET Description = ?, Price = ? WHERE Product_ID = ?";
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("ssi", $description, $price, $productId);
+    $stmt->execute();
 
-    // Check if the file is uploaded successfully
-    if ($_FILES['file']['error'] == UPLOAD_ERR_OK) {
-        $newImage = uniqid();
-        $newImage .= '.' . $imageExtension;
-
-        $targetPath = __DIR__ . '/../Images/' . $newImage;
-
-        if (move_uploaded_file($source_path, $targetPath)) {
-            // File uploaded successfully
-            echo "<script>alert('File uploaded successfully')</script>";
-        } else {
-            // Error uploading file
-            echo "<script>alert('Error uploading file')</script>";
-            // Check the PHP error for more details
-            echo "<script>console.log('PHP Error:', " . json_encode(error_get_last()) . ")</script>";
-        }
+    if ($stmt->affected_rows > 0) {
+        echo "<script>alert('Product updated successfully!')</script>";
     } else {
-        // File upload error
-        echo "<script>alert('File upload error: " . $_FILES['file']['error'] . "')</script>";
+        echo "<script>alert('Error updating product')</script>";
     }
 
-        $sql = "INSERT INTO add_stocks (Category_Name, Product_Name, Description, Quantity, Price, Transaction_No, Employee_Name, Date, image)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        $stmt = $con->prepare($sql);
-        $stmt->bind_param("sssiissss", $productCategory, $productName, $description, $stocks, $price, $transactionNo, $employeeName, $date, $newImage);
-        $stmt->execute();
+    $stmt->close();
+}
 
-        if ($stmt->affected_rows > 0) {
-            echo "<script>alert('Product has been inserted successfully!')</script>";
-        } else {
-            echo "<script>alert('Error inserting product')</script>";
-        }
-
-        $stmt->close();
-    }
+$con->close();
 ?>
+
 
 <?php
 include'../includes/footer.php';

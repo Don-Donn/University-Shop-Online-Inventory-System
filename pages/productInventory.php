@@ -28,11 +28,15 @@ include'../includes/sidebar.php';
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0"> 
                <thead>
                    <tr>
+                     <th>ID</th>
                      <th>CATEGORY</th>
                      <th>PRODUCT NAME</th>
                      <th>DESCRIPTION</th>
                      <th>STOCKS</th>
                      <th>PRICE</th>
+                     <th>TRANSACTION #</th>
+                     <th>EMPLOYEE NAME</th>
+                     <th>DATE</th>
                    </tr>
                </thead>
                 <tbody>
@@ -42,16 +46,22 @@ include'../includes/sidebar.php';
                     if ($con->connect_error) {
                         die("Connection failed: " . $con->connect_error);
                     }
-                    $sql = "SELECT Category_Name, Product_Name, Description, Quantity, Price FROM add_stocks";
+                    $sql = "SELECT a.Product_ID, a.Category_Name, a.Product_Name, a.Description, a.Quantity, a.Price, t.Transaction_No, t.Employee_Name, t.Date
+                    FROM add_stocks a
+                    LEFT JOIN transaction t ON a.Product_ID = t.Product_ID";
                     $result = $con->query($sql);
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
                                 echo "<tr>";
+                                echo "<td>" .$row["Product_ID"] . "</td>";
                                 echo "<td>" .$row["Category_Name"] . "</td>";
                                 echo "<td>" . $row["Product_Name"] . "</td>";
                                 echo "<td>" . $row["Description"] . "</td>";
                                 echo "<td>" . $row["Quantity"] . "</td>";
                                 echo "<td>" . $row["Price"] . "</td>";
+                                echo "<td>" . $row["Transaction_No"] . "</td>";
+                                echo "<td>" . $row["Employee_Name"] . "</td>";
+                                echo "<td>" . $row["Date"] . "</td>";
                                 echo "</tr>";
                             }
                         } else {

@@ -77,7 +77,7 @@ include'../includes/sidebar.php';
                         } else if (isset($_POST['saveButton'])) {
                             $announcement = $_POST['outputTextarea'];
 
-                            $sql = "UPDATE announcement SET announcement = '$announcement' WHERE id='1'";
+                            $sql = "UPDATE announcement SET announcement = '$announcement'";
                             $result = $con->query($sql);
 
                             if ($result) {
@@ -86,7 +86,7 @@ include'../includes/sidebar.php';
                         } else if (isset($_POST['clearButton'])) {
                             $announcement = "";
 
-                            $sql = "UPDATE announcement SET announcement = '$announcement'";
+                            $sql = "DELETE FROM announcement";
                             $result = $con->query($sql);
 
                             if ($result) {

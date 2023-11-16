@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2023 at 08:30 AM
+-- Generation Time: Nov 16, 2023 at 02:31 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -34,9 +34,6 @@ CREATE TABLE `add_stocks` (
   `Description` varchar(100) NOT NULL,
   `Price` int(50) NOT NULL,
   `Quantity` int(50) NOT NULL,
-  `Transaction_No` int(50) NOT NULL,
-  `Employee_Name` varchar(10) NOT NULL,
-  `Date` date NOT NULL,
   `image` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -44,8 +41,9 @@ CREATE TABLE `add_stocks` (
 -- Dumping data for table `add_stocks`
 --
 
-INSERT INTO `add_stocks` (`Product_ID`, `Category_Name`, `Product_Name`, `Description`, `Price`, `Quantity`, `Transaction_No`, `Employee_Name`, `Date`, `image`) VALUES
-(1, 'Uniform', 'Polo', 'Large', 350, 15, 1, 'Juan Tamad', '2023-11-10', '654dda55176fe.');
+INSERT INTO `add_stocks` (`Product_ID`, `Category_Name`, `Product_Name`, `Description`, `Price`, `Quantity`, `image`) VALUES
+(1, 'Uniform', 'Polo', 'Medium', 500, 35, '6554dfe7a1fa7.png'),
+(2, 'ID', 'ID Lace', '2023', 60, 45, '6556181406852.png');
 
 -- --------------------------------------------------------
 
@@ -68,6 +66,27 @@ CREATE TABLE `out_stocks` (
   `Product_ID` int(100) NOT NULL,
   `Stocks` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transaction`
+--
+
+CREATE TABLE `transaction` (
+  `Product_ID` int(255) NOT NULL,
+  `Transaction_No` int(100) NOT NULL,
+  `Employee_Name` varchar(100) NOT NULL,
+  `Date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `transaction`
+--
+
+INSERT INTO `transaction` (`Product_ID`, `Transaction_No`, `Employee_Name`, `Date`) VALUES
+(1, 1, 'Juan Tamad', '2023-11-15'),
+(2, 2, 'Juan Tamad', '2023-11-16');
 
 -- --------------------------------------------------------
 
@@ -138,6 +157,12 @@ ALTER TABLE `out_stocks`
   ADD PRIMARY KEY (`Product_ID`);
 
 --
+-- Indexes for table `transaction`
+--
+ALTER TABLE `transaction`
+  ADD PRIMARY KEY (`Product_ID`);
+
+--
 -- Indexes for table `user_data`
 --
 ALTER TABLE `user_data`
@@ -157,7 +182,7 @@ ALTER TABLE `user_login`
 -- AUTO_INCREMENT for table `add_stocks`
 --
 ALTER TABLE `add_stocks`
-  MODIFY `Product_ID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Product_ID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `announcement`
@@ -170,6 +195,12 @@ ALTER TABLE `announcement`
 --
 ALTER TABLE `out_stocks`
   MODIFY `Product_ID` int(100) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `transaction`
+--
+ALTER TABLE `transaction`
+  MODIFY `Product_ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user_data`
