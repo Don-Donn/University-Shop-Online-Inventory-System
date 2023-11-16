@@ -58,7 +58,7 @@
         <tr>
             <th scope="col">Image</th>
             <th scope="col">Product</th>
-            <th scope="col">Size</th>
+            <th scope="col">Description</th>
             <th scope="col">Stock(s)</th>
             <th scope="col">Price</th>
         </tr>

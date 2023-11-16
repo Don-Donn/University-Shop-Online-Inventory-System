@@ -83,36 +83,62 @@ include'../includes/sidebar.php';
         </div>
         <div class="addForm">
             <form method="POST">
-                <label for="productCategory">Product Category:</label><br>
-                <select id="productCategory" name="productCategory">
-                <option value="Uniform">Uniform</option>
-                    <option value="ID">ID</option>
-                    <option value="Textile">Textile</option>
-                    <option value="Dept Shirt">Dept Shirt</option>
-                    <option value="Merchandise">Merchandise</option>
-                    <option value="Hygiene">Hygiene</option>
-                    <option value="School Supply">School Supply</option>
-                </select>
-                <br>
-                
-                <label for="productName">Product Name:</label><br>
-                <input type="text" id="productName" name="productName" required>
-                <br>
-                
-                <label for="description">Description:</label><br>
-                <input type="text" id="description" name="description" required>
+                <label for="productID">Product ID:</label><br>
+                <input type="number" id="productID" name="productID" required>
                 <br>
                 
                 <label for="stocks">Quantity:</label><br>
                 <input type="number" id="stocks" name="stocks" required>
                 <br>
-                
+    
                 
                 <button class="addButton" type="submit" name="addButton">ADD</button>
             </form>
         </div>
 
     </div>
+
+    <?php
+    include("../includes/connection.php");
+
+    if ($con->connect_error) {
+        die("Connection failed: " . $con->connect_error);
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addButton'])) {
+        $productId = $_POST['productID'];
+        $quantity = $_POST['stocks'];
+
+
+        $checkSql = "SELECT * FROM add_stocks WHERE Product_ID = ?";
+        $checkStmt = $con->prepare($checkSql);
+        $checkStmt->bind_param("i", $productId);
+        $checkStmt->execute();
+        $result = $checkStmt->get_result();
+
+        if ($result->num_rows > 0) {
+
+            $updateSql = "UPDATE add_stocks SET Quantity = Quantity + ? WHERE Product_ID = ?";
+            $updateStmt = $con->prepare($updateSql);
+            $updateStmt->bind_param("ii", $quantity, $productId);
+            $updateStmt->execute();
+
+            if ($updateStmt->affected_rows > 0) {
+                echo "<script>alert('Stocks added successfully!')</script>";
+            } else {
+                echo "<script>alert('Error adding stocks')</script>";
+            }
+
+            $updateStmt->close();
+        } else {
+            echo "<script>alert('Product ID does not exist')</script>";
+        }
+
+        $checkStmt->close();
+    }
+
+    $con->close();
+?>
     
     <!--End of transaction.php content -->
 
