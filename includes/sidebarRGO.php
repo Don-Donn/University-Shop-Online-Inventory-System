@@ -79,7 +79,7 @@
 
 <!-- include_once topbar/header -->
 <?php include_once 'topbar.php'; ?>
-<?php include_once '../pages/logoutAdmin.php'; ?>
+<?php include_once '../pages/logoutRGO.php'; ?>
 <!-- move end html tag to footer-->
 
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 16, 2023 at 02:31 PM
+-- Generation Time: Nov 17, 2023 at 04:18 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -29,21 +29,18 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `add_stocks` (
   `Product_ID` int(100) NOT NULL,
-  `Category_Name` varchar(100) NOT NULL,
-  `Product_Name` varchar(100) NOT NULL,
-  `Description` varchar(100) NOT NULL,
-  `Price` int(50) NOT NULL,
   `Quantity` int(50) NOT NULL,
-  `image` varchar(50) NOT NULL
+  `Transaction_No` int(50) NOT NULL,
+  `Employee_Name` varchar(50) NOT NULL,
+  `Date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `add_stocks`
 --
 
-INSERT INTO `add_stocks` (`Product_ID`, `Category_Name`, `Product_Name`, `Description`, `Price`, `Quantity`, `image`) VALUES
-(1, 'Uniform', 'Polo', 'Medium', 500, 35, '6554dfe7a1fa7.png'),
-(2, 'ID', 'ID Lace', '2023', 60, 45, '6556181406852.png');
+INSERT INTO `add_stocks` (`Product_ID`, `Quantity`, `Transaction_No`, `Employee_Name`, `Date`) VALUES
+(1, 20, 1, 'Kimi', '2023-11-17');
 
 -- --------------------------------------------------------
 
@@ -56,6 +53,13 @@ CREATE TABLE `announcement` (
   `announcement` varchar(10000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `announcement`
+--
+
+INSERT INTO `announcement` (`id`, `announcement`) VALUES
+(1, 'UwU');
+
 -- --------------------------------------------------------
 
 --
@@ -64,29 +68,40 @@ CREATE TABLE `announcement` (
 
 CREATE TABLE `out_stocks` (
   `Product_ID` int(100) NOT NULL,
-  `Stocks` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `transaction`
---
-
-CREATE TABLE `transaction` (
-  `Product_ID` int(255) NOT NULL,
+  `SoldStocks` varchar(100) NOT NULL,
   `Transaction_No` int(100) NOT NULL,
-  `Employee_Name` varchar(100) NOT NULL,
+  `Employee_Name` varchar(50) NOT NULL,
   `Date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `transaction`
+-- Dumping data for table `out_stocks`
 --
 
-INSERT INTO `transaction` (`Product_ID`, `Transaction_No`, `Employee_Name`, `Date`) VALUES
-(1, 1, 'Juan Tamad', '2023-11-15'),
-(2, 2, 'Juan Tamad', '2023-11-16');
+INSERT INTO `out_stocks` (`Product_ID`, `SoldStocks`, `Transaction_No`, `Employee_Name`, `Date`) VALUES
+(1, '25', 1, 'Kimi', '2023-11-17');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product`
+--
+
+CREATE TABLE `product` (
+  `Product_ID` int(100) NOT NULL,
+  `Category_Name` varchar(100) NOT NULL,
+  `Product_Name` varchar(100) NOT NULL,
+  `Description` varchar(100) NOT NULL,
+  `Price` int(50) NOT NULL,
+  `image` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`Product_ID`, `Category_Name`, `Product_Name`, `Description`, `Price`, `image`) VALUES
+(1, 'Uniform', 'Polo', 'Medium', 200, '6557830aad867.png');
 
 -- --------------------------------------------------------
 
@@ -108,9 +123,9 @@ CREATE TABLE `user_data` (
 --
 
 INSERT INTO `user_data` (`User_ID`, `User_Code`, `Last_Name`, `First_Name`, `User_Type`, `Classification`) VALUES
-(3, '1234', 'Tatum', 'Jason', 'Admin', 'RGO Staff'),
+(3, '1234', 'Tatum', 'Jason', 'Admin', 'Shop Admin'),
 (4, 'umay', 'Sagan', 'Peter', 'User', 'Student'),
-(5, 'kimi', 'Chu', 'Kimi', 'Admin', 'RGO Staff');
+(5, 'kimi', 'Chu', 'Kimi', 'RGO Admin', 'RGO Staff');
 
 -- --------------------------------------------------------
 
@@ -132,7 +147,7 @@ CREATE TABLE `user_login` (
 INSERT INTO `user_login` (`User_ID`, `User_Type`, `User_Email`, `User_Password`) VALUES
 (3, 'Admin', '1234@g.batstate-u.edu.ph', 'admin'),
 (4, 'User', 'umay@g.batstate-u.edu.ph', 'umay'),
-(5, 'Admin', 'kimi@g.batstate-u.edu.ph', 'admin');
+(5, 'RGO Admin', 'kimi@g.batstate-u.edu.ph', 'admin');
 
 --
 -- Indexes for dumped tables
@@ -157,9 +172,9 @@ ALTER TABLE `out_stocks`
   ADD PRIMARY KEY (`Product_ID`);
 
 --
--- Indexes for table `transaction`
+-- Indexes for table `product`
 --
-ALTER TABLE `transaction`
+ALTER TABLE `product`
   ADD PRIMARY KEY (`Product_ID`);
 
 --
@@ -182,25 +197,25 @@ ALTER TABLE `user_login`
 -- AUTO_INCREMENT for table `add_stocks`
 --
 ALTER TABLE `add_stocks`
-  MODIFY `Product_ID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Product_ID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `announcement`
 --
 ALTER TABLE `announcement`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `out_stocks`
 --
 ALTER TABLE `out_stocks`
-  MODIFY `Product_ID` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `Product_ID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `transaction`
+-- AUTO_INCREMENT for table `product`
 --
-ALTER TABLE `transaction`
-  MODIFY `Product_ID` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `product`
+  MODIFY `Product_ID` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user_data`

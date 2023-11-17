@@ -116,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Add other fields as needed
 
     // Update the product details in the database
-    $sql = "UPDATE add_stocks SET Description = ?, Price = ? WHERE Product_ID = ?";
+    $sql = "UPDATE product SET Description = ?, Price = ? WHERE Product_ID = ?";
     $stmt = $con->prepare($sql);
     $stmt->bind_param("ssi", $description, $price, $productId);
     $stmt->execute();

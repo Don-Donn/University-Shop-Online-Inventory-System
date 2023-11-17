@@ -12,16 +12,16 @@
         
         if (mysqli_num_rows($result) == 1) {
             $row = mysqli_fetch_assoc($result);
-            if ($row['User_Type'] == "Admin") {
+            if ($row['User_Type'] == "RGO Admin") {
 
                 $_SESSION['user_id'] = $row['User_ID'];
                 header("Location: RGOstaff.php");
         } else {
         
-            echo "<script>alert('Invalid, This is not Admin Account. Please Try Again'); window.location='loginCustomer.php'</script>";
+            echo "<script>alert('Invalid, This is not RGO Admin Account. Please Try Again'); window.location='loginRGOstaff.php'</script>";
         }
     }else{
-        echo "<script>alert('Invalid Email or Password. Please Try Again!'); window.location='loginCustomer.php'</script>";
+        echo "<script>alert('Invalid Email or Password. Please Try Again!'); window.location='loginRGOstaff.php'</script>";
     }
 }
 ?>

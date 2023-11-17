@@ -120,35 +120,27 @@ include'../includes/sidebarRGO.php';
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addButton'])) {
         $productId = $_POST['productID'];
         $quantity = $_POST['stocks'];
+        $transactionNo = $_POST['transaction'];
+        $employeeName = $_POST['employee'];
+        $date = $_POST['date'];
 
 
-        $checkSql = "SELECT * FROM add_stocks WHERE Product_ID = ?";
-        $checkStmt = $con->prepare($checkSql);
-        $checkStmt->bind_param("i", $productId);
-        $checkStmt->execute();
-        $result = $checkStmt->get_result();
 
-        if ($result->num_rows > 0) {
-
-            $updateSql = "UPDATE add_stocks SET Quantity = Quantity + ? WHERE Product_ID = ?";
-            $updateStmt = $con->prepare($updateSql);
-            $updateStmt->bind_param("ii", $quantity, $productId);
-            $updateStmt->execute();
-
-            if ($updateStmt->affected_rows > 0) {
-                echo "<script>alert('Stocks added successfully!')</script>";
-            } else {
-                echo "<script>alert('Error adding stocks')</script>";
-            }
-
-            $updateStmt->close();
+        $sql = "INSERT INTO add_stocks (Product_ID, Quantity, Transaction_No, Employee_Name, Date)
+        VALUES (?, ?, ?, ?, ?)";
+    
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param("iisss", $productId, $quantity, $transactionNo, $employeeName, $date);
+        $stmt->execute();
+    
+        if ($stmt->affected_rows > 0) {
+            echo "<script>alert('Stocks added to add_stocks table successfully!')</script>";
         } else {
-            echo "<script>alert('Product ID does not exist')</script>";
+            echo "<script>alert('Error inserting stocks into add_stocks table: " . $stmt->error . "')</script>";
         }
-
-        $checkStmt->close();
+    
+        $stmt->close();
     }
-
     $con->close();
 ?>
     

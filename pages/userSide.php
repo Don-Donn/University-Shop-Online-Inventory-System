@@ -70,7 +70,9 @@
         if ($con->connect_error) {
             die("Connection failed: " . $con->connect_error);
         }
-        $sql = "SELECT image, Product_Name, Description, Quantity, Price FROM add_stocks";
+        $sql = "SELECT p.image, p.Category_Name, p.Product_Name, p.Description, a.Quantity, p.Price
+                FROM product as p
+                LEFT JOIN add_stocks as a ON p.Product_ID = a.Product_ID";
         $result = $con->query($sql);
 
             if ($result->num_rows > 0) {

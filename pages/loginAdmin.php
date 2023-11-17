@@ -18,10 +18,10 @@
                 header("Location: adminSide.php");
         } else {
         
-            echo "<script>alert('Invalid, This is not Admin Account. Please Try Again'); window.location='loginCustomer.php'</script>";
+            echo "<script>alert('Invalid, This is not Admin Account. Please Try Again'); window.location='loginAdmin.php'</script>";
         }
     }else{
-        echo "<script>alert('Invalid Email or Password. Please Try Again!'); window.location='loginCustomer.php'</script>";
+        echo "<script>alert('Invalid Email or Password. Please Try Again!'); window.location='loginAdmin.php'</script>";
     }
 }
 ?>
