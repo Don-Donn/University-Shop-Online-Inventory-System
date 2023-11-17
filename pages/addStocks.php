@@ -1,6 +1,6 @@
 <?php
 include'../includes/connection.php';
-include'../includes/sidebar.php';
+include'../includes/sidebarRGO.php';
 ?>
     <!--Style transaction.php content -->
     <style>
@@ -89,6 +89,18 @@ include'../includes/sidebar.php';
                 
                 <label for="stocks">Quantity:</label><br>
                 <input type="number" id="stocks" name="stocks" required>
+                <br>
+
+                <label for="transaction">Transaction NO:</label><br>
+                <input type="number" id="transaction" name="transaction" required>
+                <br>
+
+                <label for="employee">Employee Name:</label><br>
+                <input type="text" id="employee" name="employee" required>
+                <br>
+
+                <label for="date">Date:</label><br>
+                <input type="date" id="date" name="date" required>
                 <br>
     
                 

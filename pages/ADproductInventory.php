@@ -1,6 +1,6 @@
 <?php
 include'../includes/connection.php';
-include'../includes/sidebarRGO.php';
+include'../includes/sidebar.php';
 ?>
 
     <style>
