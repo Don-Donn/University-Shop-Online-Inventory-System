@@ -58,7 +58,7 @@
         <tr>
             <th scope="col">Image</th>
             <th scope="col">Product</th>
-            <th scope="col">Size</th>
+            <th scope="col">Description</th>
             <th scope="col">Stock(s)</th>
             <th scope="col">Price</th>
         </tr>
@@ -76,7 +76,7 @@
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>";
-                    echo "<td><img src='../Images/" .$row["image"] . "' alt='Image not available'></td>";
+                    echo "<td><img src='../Images/" .$row["image"] . "' alt='Image not available' width='150' hegiht='100'></td>";
                     echo "<td>" . $row["Product_Name"] . "</td>";
                     echo "<td>" . $row["Description"] . "</td>";
                     echo "<td>" . $row["Quantity"] . "</td>";

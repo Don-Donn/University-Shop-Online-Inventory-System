@@ -1,6 +1,6 @@
 <?php
 include'../includes/connection.php';
-include'../includes/sidebar.php';
+include'../includes/sidebarRGO.php';
 ?>
     <!--Style transaction.php content -->
     <style>
@@ -82,7 +82,7 @@ include'../includes/sidebar.php';
             </ul>
         </div>
         <div class="addForm">
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
                 <label for="productCategory">Product Category:</label><br>
                 <select id="productCategory" name="productCategory">
                     <option value="Uniform">Uniform</option>
@@ -103,24 +103,8 @@ include'../includes/sidebar.php';
                 <input type="text" id="description" name="description" required>
                 <br>
                 
-                <label for="stocks">Stocks:</label><br>
-                <input type="number" id="stocks" name="stocks" required>
-                <br>
-                
                 <label for="price">Price:</label><br>
                 <input type="number" id="price" name="price" required>
-                <br>
-
-                <label for="transaction">Transaction NO:</label><br>
-                <input type="number" id="transaction" name="transaction" required>
-                <br>
-
-                <label for="employee">Employee Name:</label><br>
-                <input type="text" id="employee" name="employee" required>
-                <br>
-
-                <label for="date">Date:</label><br>
-                <input type="date" id="date" name="date" required>
                 <br>
 
                 <label for="file">Product Image:</label>
@@ -156,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $imageExtension = explode('.', $filename);
     $imageExtension = strtolower(end($imageExtension));
 
-    // Check if the file is uploaded successfully
+
     if ($_FILES['file']['error'] == UPLOAD_ERR_OK) {
         $newImage = uniqid();
         $newImage .= '.' . $imageExtension;
@@ -164,35 +148,52 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $targetPath = __DIR__ . '/../Images/' . $newImage;
 
         if (move_uploaded_file($source_path, $targetPath)) {
-            // File uploaded successfully
+
             echo "<script>alert('File uploaded successfully')</script>";
         } else {
-            // Error uploading file
+
             echo "<script>alert('Error uploading file')</script>";
-            // Check the PHP error for more details
+
             echo "<script>console.log('PHP Error:', " . json_encode(error_get_last()) . ")</script>";
         }
     } else {
-        // File upload error
+
         echo "<script>alert('File upload error: " . $_FILES['file']['error'] . "')</script>";
     }
 
-        $sql = "INSERT INTO add_stocks (Category_Name, Product_Name, Description, Quantity, Price, Transaction_No, Employee_Name, Date, image)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        $stmt = $con->prepare($sql);
-        $stmt->bind_param("sssiissss", $productCategory, $productName, $description, $stocks, $price, $transactionNo, $employeeName, $date, $newImage);
-        $stmt->execute();
+    $sqlstocks = "INSERT INTO add_stocks (Category_Name, Product_Name, Description, Quantity, Price, image)
+    VALUES (?, ?, ?, ?, ?, ?)";
 
-        if ($stmt->affected_rows > 0) {
-            echo "<script>alert('Product has been inserted successfully!')</script>";
-        } else {
-            echo "<script>alert('Error inserting product')</script>";
-        }
+    $stmtstocks = $con->prepare($sqlstocks);
+    $stmtstocks->bind_param("sssiss", $productCategory, $productName, $description, $stocks, $price, $newImage);
+    $stmtstocks->execute();
 
-        $stmt->close();
+    if ($stmtstocks->affected_rows > 0) {
+        echo "<script>alert('Product added to add_stocks table successfully!')</script>";
+    } else {
+        echo "<script>alert('Error inserting product into add_stocks table: " . $stmtstocks->error . "')</script>";
     }
-?>
 
+    $stmtstocks->close();
+
+    // Insert data into the 'transaction' table
+    $sqltransaction = "INSERT INTO transaction (Transaction_No, Employee_Name, Date)
+        VALUES (?, ?, ?)";
+
+    $stmttrans = $con->prepare($sqltransaction);
+    $stmttrans->bind_param("iss", $transactionNo, $employeeName, $date);
+    $stmttrans->execute();
+
+    if ($stmttrans->affected_rows > 0) {
+        echo "<script>alert('Transaction data added to transaction table successfully!')</script>";
+    } else {
+        echo "<script>alert('Error inserting transaction data: " . $stmttrans->error . "')</script>";
+    }
+    $stmttrans->close();
+    $stmttrans->close();
+    }
+    $con->close();
+?>
 <?php
 include'../includes/footer.php';
 ?>
