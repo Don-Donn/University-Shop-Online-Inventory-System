@@ -52,10 +52,10 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="notAdmin.php">
+                        <p class="nav-link">
                             <i class="fa-solid fa-user"></i>
                             <span>Accounts</span>
-                        </a>
+                        </p>
                     </li>
                 </ul>
 
