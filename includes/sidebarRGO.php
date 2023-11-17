@@ -34,25 +34,25 @@
                     <!-- Nav Items -->
 
                     <li class="nav-item">
-                        <a class="nav-link" href="ADproductInventory.php">
+                        <a class="nav-link" href="productInventory.php">
                             <i class="fa-solid fa-warehouse"></i>
                             <span>Product Inventory</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="notRGOstaff.php">
+                        <a class="nav-link" href="transaction.php">
                             <i class="fa-solid fa-clipboard-list fa-lg"></i>
                             <span>Transaction</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="notRGOstaff.php">
+                        <a class="nav-link" href="announcement.php">
                             <i class="fa-solid fa-bullhorn"></i>
                             <span>Announcement</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="accounts.php">
+                        <a class="nav-link" href="notAdmin.php">
                             <i class="fa-solid fa-user"></i>
                             <span>Accounts</span>
                         </a>
