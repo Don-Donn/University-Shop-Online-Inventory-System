@@ -118,8 +118,9 @@ include'../includes/sidebarRGO.php';
     
     <!--End of transaction.php content -->
 
-<?php
+    <?php
 include("../includes/connection.php");
+
 if ($con->connect_error) {
     die("Connection failed: " . $con->connect_error);
 }
@@ -128,11 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $productCategory = $_POST['productCategory'];
     $productName = $_POST['productName'];
     $description = $_POST['description'];
-    $stocks = $_POST['stocks'];
     $price = $_POST['price'];
-    $transactionNo = $_POST['transaction'];
-    $employeeName = $_POST['employee'];
-    $date = $_POST['date'];
 
     $filename = $_FILES['file']['name'];
     $fileSize = $_FILES['file']['size'];
@@ -140,59 +137,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $imageExtension = explode('.', $filename);
     $imageExtension = strtolower(end($imageExtension));
 
-
     if ($_FILES['file']['error'] == UPLOAD_ERR_OK) {
-        $newImage = uniqid();
-        $newImage .= '.' . $imageExtension;
-
+        $newImage = uniqid() . '.' . $imageExtension;
         $targetPath = __DIR__ . '/../Images/' . $newImage;
 
         if (move_uploaded_file($source_path, $targetPath)) {
-
             echo "<script>alert('File uploaded successfully')</script>";
+
+            $sql = "INSERT INTO product (Category_Name, Product_Name, Description, Price, image) VALUES (?, ?, ?, ?, ?)";
+            $stmt = $con->prepare($sql);
+            $stmt->bind_param("sssis", $productCategory, $productName, $description, $price, $newImage);
+            $stmt->execute();
+
+            if ($stmt->affected_rows > 0) {
+                echo "<script>alert('Product added to product table successfully!')</script>";
+            } else {
+                echo "<script>alert('Error inserting product into product table: " . $stmt->error . "')</script>";
+            }
+
+            $stmt->close();
         } else {
-
             echo "<script>alert('Error uploading file')</script>";
-
             echo "<script>console.log('PHP Error:', " . json_encode(error_get_last()) . ")</script>";
         }
     } else {
-
         echo "<script>alert('File upload error: " . $_FILES['file']['error'] . "')</script>";
     }
 
-    $sqlstocks = "INSERT INTO add_stocks (Category_Name, Product_Name, Description, Quantity, Price, image)
-    VALUES (?, ?, ?, ?, ?, ?)";
-
-    $stmtstocks = $con->prepare($sqlstocks);
-    $stmtstocks->bind_param("sssiss", $productCategory, $productName, $description, $stocks, $price, $newImage);
-    $stmtstocks->execute();
-
-    if ($stmtstocks->affected_rows > 0) {
-        echo "<script>alert('Product added to add_stocks table successfully!')</script>";
-    } else {
-        echo "<script>alert('Error inserting product into add_stocks table: " . $stmtstocks->error . "')</script>";
-    }
-
-    $stmtstocks->close();
-
-    // Insert data into the 'transaction' table
-    $sqltransaction = "INSERT INTO transaction (Transaction_No, Employee_Name, Date)
-        VALUES (?, ?, ?)";
-
-    $stmttrans = $con->prepare($sqltransaction);
-    $stmttrans->bind_param("iss", $transactionNo, $employeeName, $date);
-    $stmttrans->execute();
-
-    if ($stmttrans->affected_rows > 0) {
-        echo "<script>alert('Transaction data added to transaction table successfully!')</script>";
-    } else {
-        echo "<script>alert('Error inserting transaction data: " . $stmttrans->error . "')</script>";
-    }
-    $stmttrans->close();
-    $stmttrans->close();
-    }
     $con->close();
+}
 ?>
 <?php
 include'../includes/footer.php';

@@ -87,7 +87,7 @@ include'../includes/sidebarRGO.php';
                 <input type="number" id="productID" name="productID" required>
                 <br>
 
-                <label for="stocks">Stocks Sold:</label><br>
+                <label for="stocks">Quantity Sold:</label><br>
                 <input type="number" id="stocks" name="stocks" required>
                 <br>
                 
@@ -109,7 +109,6 @@ include'../includes/sidebarRGO.php';
 
     </div>
     <?php
-
     include("../includes/connection.php");
 
     if ($con->connect_error) {
@@ -119,9 +118,11 @@ include'../includes/sidebarRGO.php';
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['updateButton'])) {
         $productId = $_POST['productID'];
         $quantity = $_POST['stocks'];
+        $transactionNo = $_POST['transaction'];
+        $employeeName = $_POST['employee'];
+        $date = $_POST['date'];
 
-
-        $checkSql = "SELECT * FROM add_stocks WHERE Product_ID = ?";
+        $checkSql = "SELECT * FROM product WHERE Product_ID = ?";
         $checkStmt = $con->prepare($checkSql);
         $checkStmt->bind_param("i", $productId);
         $checkStmt->execute();
@@ -129,15 +130,27 @@ include'../includes/sidebarRGO.php';
 
         if ($result->num_rows > 0) {
 
-            $updateSql = "UPDATE add_stocks SET Quantity = Quantity - ? WHERE Product_ID = ?";
+            $updateSql = "UPDATE add_stocks SET Quantity = Quantity - ?, Transaction_No = ?, Employee_Name = ?, Date = ?  WHERE Product_ID = ?";
             $updateStmt = $con->prepare($updateSql);
-            $updateStmt->bind_param("ii", $quantity, $productId);
+            $updateStmt->bind_param("isssi", $quantity, $transactionNo, $employeeName, $date, $productId);
             $updateStmt->execute();
 
             if ($updateStmt->affected_rows > 0) {
-                echo "<script>alert('Sold stocks update successfully!')</script>";
+
+                $insertSql = "INSERT INTO out_stocks (Product_ID, SoldStocks, Transaction_No, Employee_Name, Date) VALUES (?, ?, ?, ?, ?)";
+                $insertStmt = $con->prepare($insertSql);
+                $insertStmt->bind_param("iisss", $productId, $quantity, $transactionNo, $employeeName, $date);
+                $insertStmt->execute();
+
+                if ($insertStmt->affected_rows > 0) {
+                    echo "<script>alert('Sold stocks update and inserted into out_stocks successfully!')</script>";
+                } else {
+                    echo "<script>alert('Error inserting data into out_stocks table: " . $insertStmt->error . "')</script>";
+                }
+
+                $insertStmt->close();
             } else {
-                echo "<script>alert('Error out stocks')</script>";
+                echo "<script>alert('Error updating stocks')</script>";
             }
 
             $updateStmt->close();

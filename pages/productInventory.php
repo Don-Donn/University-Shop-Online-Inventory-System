@@ -32,11 +32,8 @@ include'../includes/sidebarRGO.php';
                      <th>CATEGORY</th>
                      <th>PRODUCT NAME</th>
                      <th>DESCRIPTION</th>
-                     <th>STOCKS</th>
+                     <th>Quantity</th>   
                      <th>PRICE</th>
-                     <th>TRANSACTION #</th>
-                     <th>EMPLOYEE NAME</th>
-                     <th>DATE</th>
                    </tr>
                </thead>
                 <tbody>
@@ -46,9 +43,9 @@ include'../includes/sidebarRGO.php';
                     if ($con->connect_error) {
                         die("Connection failed: " . $con->connect_error);
                     }
-                    $sql = "SELECT a.Product_ID, a.Category_Name, a.Product_Name, a.Description, a.Quantity, a.Price
-                    FROM add_stocks a
-                    LEFT JOIN transaction t ON a.Product_ID = t.Product_ID";
+                    $sql = "SELECT p.Product_ID, p.Category_Name, p.Product_Name, p.Description, a.Quantity, p.Price
+                    FROM product as p
+                    LEFT JOIN add_stocks as a ON p.Product_ID = a.Product_ID";
                     $result = $con->query($sql);
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
