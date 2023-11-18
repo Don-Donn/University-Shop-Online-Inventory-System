@@ -34,19 +34,19 @@
                     <!-- Nav Items -->
 
                     <li class="nav-item">
-                        <a class="nav-link" href="productInventory.php">
+                        <a class="nav-link" id="navLink1" href="productInventory.php" onclick="toggleColor(this)">
                             <i class="fa-solid fa-warehouse"></i>
                             <span>Product Inventory</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="transaction.php">
+                        <a class="nav-link" id="navLink2" href="transaction.php">
                             <i class="fa-solid fa-clipboard-list fa-lg"></i>
                             <span>Transaction</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="announcement.php">
+                        <a class="nav-link" id="navLink3" href="announcement.php">
                             <i class="fa-solid fa-bullhorn"></i>
                             <span>Announcement</span>
                         </a>

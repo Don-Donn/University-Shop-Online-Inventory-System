@@ -32,7 +32,7 @@ include'../includes/sidebarRGO.php';
                      <th>CATEGORY</th>
                      <th>PRODUCT NAME</th>
                      <th>DESCRIPTION</th>
-                     <th>Quantity</th>   
+                     <th>QUANTITY</th>   
                      <th>PRICE</th>
                    </tr>
                </thead>

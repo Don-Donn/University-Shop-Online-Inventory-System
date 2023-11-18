@@ -49,9 +49,9 @@
                     if (mysqli_num_rows($result) == 1) {
                         $row = mysqli_fetch_assoc($result);
                         $first_name = $row['First_Name'];
-                        echo "<h4>Welcome Admin $first_name!</h4>";
+                        echo "<h6 style='position: absolute; top: 40px; right: 15px; color: black;'>Admin $first_name</h6>";
                     } else {
-                        echo "<h5>Welcome, Admin!</h5>";
+                        echo "<h6 style='position: absolute; top: 40px; right: 15px; color: black;'>Admin</h6>";
                     }
                 } else {
                     header("Location: loginAdmin.php");

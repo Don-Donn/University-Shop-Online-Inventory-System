@@ -34,7 +34,7 @@
                     <!-- Nav Items -->
 
                     <li class="nav-item">
-                        <a class="nav-link" href="ADproductInventory.php">
+                        <a class="nav-link" id="navLink4" href="ADproductInventory.php">
                             <i class="fa-solid fa-warehouse"></i>
                             <span>Product Inventory</span>
                         </a>
@@ -52,7 +52,7 @@
                         </p>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="accounts.php">
+                        <a class="nav-link" id="navLink5" href="accounts.php">
                             <i class="fa-solid fa-user"></i>
                             <span>Accounts</span>
                         </a>

@@ -32,7 +32,7 @@ include'../includes/sidebar.php';
                      <th>CATEGORY</th>
                      <th>PRODUCT NAME</th>
                      <th>DESCRIPTION</th>
-                     <th>STOCKS</th>
+                     <th>QUANTITY</th>
                      <th>PRICE</th>
                    </tr>
                </thead>
