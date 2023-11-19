@@ -1,6 +1,3 @@
-$(document).ready(function() {
-    $('#sidebar a').click(function() {
-        $('#sidebar a').removeClass('active');
-        $(this).addClass('active');
-    });
-});
+function toggleColor(link) {
+    link.classList.toggle('clicked');
+  }

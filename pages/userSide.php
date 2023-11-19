@@ -34,9 +34,9 @@
                 if (mysqli_num_rows($result) == 1) {
                     $row = mysqli_fetch_assoc($result);
                     $first_name = $row['First_Name'];
-                    echo "<h2>Welcome, $first_name!</h2>";
+                    echo "<h6 style='position: absolute; top: 43px; right: 133px; color: white;'>$first_name</h6>";
                 } else {
-                    echo "<h2>Welcome, User!</h2>";
+                    echo "<h6 style='position: absolute; top: 43px; right: 133px; color: white;'>User</h6>";
                 }
             } else {
 
@@ -59,7 +59,7 @@
             <th scope="col">Image</th>
             <th scope="col">Product</th>
             <th scope="col">Description</th>
-            <th scope="col">Stock(s)</th>
+            <th scope="col">Quantity</th>
             <th scope="col">Price</th>
         </tr>
     </thead>

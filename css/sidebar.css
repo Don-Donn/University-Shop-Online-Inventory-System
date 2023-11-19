@@ -38,6 +38,7 @@ body{
 }
 
 #header-hr {
+    color:maroon;
     border: 1.60px solid maroon; 
     margin: 15px;
     left:5;
@@ -67,12 +68,32 @@ ul{
 
 }
 
-.nav-link:hover{
+#navLink1:hover{
     background: maroon;
     color: white;
 }
 
-.nav-link.clicked {
+#navLink2:hover{
+    background: maroon;
+    color: white;
+}
+
+#navLink3:hover{
+    background: maroon;
+    color: white;
+}
+
+#navLink4:hover{
+    background: maroon;
+    color: white;
+}
+
+#navLink5:hover{
+    background: maroon;
+    color: white;
+}
+
+.nav-link.clicked{
     background: maroon;
     color: white;
 }
@@ -93,6 +114,7 @@ ul{
 
 
 #logout-hr{
+    color: maroon;
     bottom: 60px;
     border: .1px solid maroon; 
     margin: 15px;
