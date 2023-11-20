@@ -26,6 +26,28 @@
                     <img id="spartanLlogo" src="../icons/redSpartan.png" alt="Logo" width="95" height="102" >
                     <p class="univ-txt">University <br>Shop</p>
                 </div>
+                <?php
+                    session_start();
+                    include("../includes/connection.php");
+
+                    if (isset($_SESSION['user_id'])) {
+                        $user_id = $_SESSION['user_id'];
+
+                        $query = "SELECT First_Name FROM user_data WHERE User_ID = $user_id";
+                        $result = mysqli_query($con, $query);
+
+                        if (mysqli_num_rows($result) == 1) {
+                            $row = mysqli_fetch_assoc($result);
+                            $first_name = $row['First_Name'];
+                            echo "<h6 style='position: absolute; top: 43px; right: 133px; color: white;'>$first_name</h6>";
+                        } else {
+                            echo "<h6 style='position: absolute; top: 43px; right: 133px; color: white;'>User</h6>";
+                        }
+                    } else {
+
+                        header("Location: loginRGOstaff.php");
+                    }
+                ?>
                 <ul>
 
                     <!-- Divider -->
