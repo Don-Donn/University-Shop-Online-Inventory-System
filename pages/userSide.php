@@ -28,12 +28,12 @@
             if (isset($_SESSION['user_id'])) {
                 $user_id = $_SESSION['user_id'];
 
-                $query = "SELECT First_Name FROM user_data WHERE User_ID = $user_id";
+                $query = "SELECT firstname FROM tb_studentinfo WHERE studid = $user_id";
                 $result = mysqli_query($con, $query);
 
                 if (mysqli_num_rows($result) == 1) {
                     $row = mysqli_fetch_assoc($result);
-                    $first_name = $row['First_Name'];
+                    $first_name = $row['firstname'];
                     echo "<h6 style='position: absolute; top: 43px; right: 133px; color: white;'>$first_name</h6>";
                 } else {
                     echo "<h6 style='position: absolute; top: 43px; right: 133px; color: white;'>User</h6>";

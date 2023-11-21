@@ -81,6 +81,34 @@ include'../includes/sidebarRGO.php';
                 </li>             
             </ul>
         </div>
+        <?php
+        session_start();
+
+        include("../includes/connection.php");
+
+        if ($con->connect_error) {
+            die("Connection failed: " . $con->connect_error);
+        }
+        if (isset($_SESSION['user_id'])) {
+
+            $userID = $_SESSION['user_id'];
+
+            $userQuery = "SELECT firstname, lastname FROM tbemployee WHERE empid = ?";
+            $userStmt = $con->prepare($userQuery);
+            $userStmt->bind_param("i", $userID);
+            $userStmt->execute();
+            $userStmt->bind_result($firstname, $lastname);
+
+
+            $userStmt->fetch();
+            $userStmt->close();
+
+            $employeeName = $firstname . ' ' . $lastname;
+        } else {
+
+            $employeeName = "Guest";
+        }
+        ?>
         <div class="addForm">
             <form method="POST">
                 <label for="productID">Product ID:</label><br>
@@ -96,7 +124,7 @@ include'../includes/sidebarRGO.php';
                 <br>
 
                 <label for="employee">Employee Name:</label><br>
-                <input type="text" id="employee" name="employee" required>
+                <input type="text" id="employee" name="employee" value="<?php echo $employeeName; ?>" readonly>
                 <br>
 
                 <label for="date">Date:</label><br>
@@ -116,31 +144,72 @@ include'../includes/sidebarRGO.php';
     if ($con->connect_error) {
         die("Connection failed: " . $con->connect_error);
     }
+            
+    if (isset($_SESSION['user_id'])) {
+        $empid = $_SESSION['user_id'];
+    } else {
+        header("Location: loginRGOstaff.php");
+        exit();
+    }
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['addButton'])) {
         $productId = $_POST['productID'];
         $quantity = $_POST['stocks'];
         $transactionNo = $_POST['transaction'];
-        $employeeName = $_POST['employee'];
         $date = $_POST['date'];
 
+        $checkSql = "SELECT * FROM product WHERE Product_ID = ?";
+        $checkStmt = $con->prepare($checkSql);
+        $checkStmt->bind_param("i", $productId);
+        $checkStmt->execute();
+        $result = $checkStmt->get_result();
 
+        if ($result->num_rows > 0) {
+            // Check if the record exists in add_stocks
+            $checkAddStocksSql = "SELECT * FROM add_stocks WHERE Product_ID = ?";
+            $checkAddStocksStmt = $con->prepare($checkAddStocksSql);
+            $checkAddStocksStmt->bind_param("i", $productId);
+            $checkAddStocksStmt->execute();
+            $addStocksResult = $checkAddStocksStmt->get_result();
 
-        $sql = "INSERT INTO add_stocks (Product_ID, Quantity, Transaction_No, Employee_Name, Date)
-        VALUES (?, ?, ?, ?, ?)";
-    
-        $stmt = $con->prepare($sql);
-        $stmt->bind_param("iisss", $productId, $quantity, $transactionNo, $employeeName, $date);
-        $stmt->execute();
-    
-        if ($stmt->affected_rows > 0) {
-            echo "<script>alert('Stocks added to add_stocks table successfully!')</script>";
+            if ($addStocksResult->num_rows > 0) {
+                // Update quantity if the record already exists
+                $updateSql = "UPDATE add_stocks SET Quantity = Quantity + ?, Transaction_No = ?, empid = ?, Date = ? WHERE Product_ID = ?";
+                $updateStmt = $con->prepare($updateSql);
+                $updateStmt->bind_param("isssi", $quantity, $transactionNo, $empid, $date, $productId);
+                $updateStmt->execute();
+
+                if ($updateStmt->affected_rows > 0) {
+                    echo "<script>alert('Stocks added and updated successfully!')</script>";
+                } else {
+                    echo "<script>alert('Error updating data in add_stocks table: " . $updateStmt->error . "')</script>";
+                }
+
+                $updateStmt->close();
+            } else {
+                // Insert new record if it doesn't exist
+                $insertSql = "INSERT INTO add_stocks (Product_ID, Quantity, Transaction_No, empid, Date) VALUES (?, ?, ?, ?, ?)";
+                $insertStmt = $con->prepare($insertSql);
+                $insertStmt->bind_param("iissi", $productId, $quantity, $transactionNo, $empid, $date);
+                $insertStmt->execute();
+
+                if ($insertStmt->affected_rows > 0) {
+                    echo "<script>alert('Stocks added successfully!')</script>";
+                } else {
+                    echo "<script>alert('Error adding data to add_stocks table: " . $insertStmt->error . "')</script>";
+                }
+
+                $insertStmt->close();
+            }
+
+            $checkAddStocksStmt->close();
         } else {
-            echo "<script>alert('Error inserting stocks into add_stocks table: " . $stmt->error . "')</script>";
+            echo "<script>alert('Product ID does not exist')</script>";
         }
-    
-        $stmt->close();
-    }
+
+        $checkStmt->close();
+    } 
+
     $con->close();
 ?>
     
