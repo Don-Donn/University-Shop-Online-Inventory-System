@@ -81,6 +81,34 @@ include'../includes/sidebarRGO.php';
                 </li>             
             </ul>
         </div>
+        <?php
+        session_start();
+
+        include("../includes/connection.php");
+
+        if ($con->connect_error) {
+            die("Connection failed: " . $con->connect_error);
+        }
+        if (isset($_SESSION['user_id'])) {
+
+            $userID = $_SESSION['user_id'];
+
+            $userQuery = "SELECT firstname, lastname FROM tbemployee WHERE empid = ?";
+            $userStmt = $con->prepare($userQuery);
+            $userStmt->bind_param("i", $userID);
+            $userStmt->execute();
+            $userStmt->bind_result($firstname, $lastname);
+
+
+            $userStmt->fetch();
+            $userStmt->close();
+
+            $employeeName = $firstname . ' ' . $lastname;
+        } else {
+
+            $employeeName = "Guest";
+        }
+        ?>
         <div class="addForm">
             <form method="POST">
                 <label for="productID">Product ID:</label><br>
@@ -96,7 +124,7 @@ include'../includes/sidebarRGO.php';
                 <br>
 
                 <label for="employee">Employee Name:</label><br>
-                <input type="text" id="employee" name="employee" required>
+                <input type="text" id="employee" name="employee" value="<?php echo $employeeName; ?>" readonly>
                 <br>
 
                 <label for="date">Date:</label><br>
@@ -119,7 +147,6 @@ include'../includes/sidebarRGO.php';
         $productId = $_POST['productID'];
         $quantity = $_POST['stocks'];
         $transactionNo = $_POST['transaction'];
-        $employeeName = $_POST['employee'];
         $date = $_POST['date'];
 
         $checkSql = "SELECT * FROM product WHERE Product_ID = ?";
@@ -129,26 +156,36 @@ include'../includes/sidebarRGO.php';
         $result = $checkStmt->get_result();
 
         if ($result->num_rows > 0) {
-
-            $updateSql = "UPDATE add_stocks SET Quantity = Quantity - ?, Transaction_No = ?, Employee_Name = ?, Date = ?  WHERE Product_ID = ?";
+            $updateSql = "UPDATE add_stocks SET Quantity = Quantity - ?, Transaction_No = ?, empid  = ?, Date = ?  WHERE Product_ID = ?";
             $updateStmt = $con->prepare($updateSql);
-            $updateStmt->bind_param("isssi", $quantity, $transactionNo, $employeeName, $date, $productId);
+            $updateStmt->bind_param("isssi", $quantity, $transactionNo, $userID, $date, $productId);
             $updateStmt->execute();
 
             if ($updateStmt->affected_rows > 0) {
-
-                $insertSql = "INSERT INTO out_stocks (Product_ID, SoldStocks, Transaction_No, Employee_Name, Date) VALUES (?, ?, ?, ?, ?)";
-                $insertStmt = $con->prepare($insertSql);
-                $insertStmt->bind_param("iisss", $productId, $quantity, $transactionNo, $employeeName, $date);
-                $insertStmt->execute();
-
-                if ($insertStmt->affected_rows > 0) {
-                    echo "<script>alert('Sold stocks update and inserted into out_stocks successfully!')</script>";
+                $checkOutStocksSql = "SELECT * FROM out_stocks WHERE Product_ID = ? AND Transaction_No = ?";
+                $checkOutStocksStmt = $con->prepare($checkOutStocksSql);
+                $checkOutStocksStmt->bind_param("is", $productId, $transactionNo);
+                $checkOutStocksStmt->execute();
+                $outStocksResult = $checkOutStocksStmt->get_result();
+            
+                if ($outStocksResult->num_rows > 0) {
+                    $updateOutStocksSql = "UPDATE out_stocks SET SoldStocks = SoldStocks + ? WHERE Product_ID = ? AND Transaction_No = ?";
+                    $updateOutStocksStmt = $con->prepare($updateOutStocksSql);
+                    $updateOutStocksStmt->bind_param("iis", $quantity, $productId, $transactionNo);
+                    $updateOutStocksStmt->execute();
+            
+                    if ($updateOutStocksStmt->affected_rows > 0) {
+                        echo "<script>alert('Sold stocks updated successfully!')</script>";
+                    } else {
+                        echo "<script>alert('Error updating SoldStocks in out_stocks table: " . $updateOutStocksStmt->error . "')</script>";
+                    }
+            
+                    $updateOutStocksStmt->close();
                 } else {
-                    echo "<script>alert('Error inserting data into out_stocks table: " . $insertStmt->error . "')</script>";
+                    echo "<script>alert('Error: Record not found in out_stocks table')</script>";
                 }
-
-                $insertStmt->close();
+            
+                $checkOutStocksStmt->close();
             } else {
                 echo "<script>alert('Error updating stocks')</script>";
             }
@@ -163,6 +200,7 @@ include'../includes/sidebarRGO.php';
 
     $con->close();
 ?>
+
     
     <!--End of transaction.php content -->
 

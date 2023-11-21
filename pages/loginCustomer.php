@@ -8,14 +8,14 @@
         $useremail = $_POST['email'];
         $password = $_POST['password'];
 
-        $query = "SELECT * FROM user_login WHERE User_Email = '$useremail'";
+        $query = "SELECT * FROM stud_data WHERE User_Email = '$useremail'";
         $result = mysqli_query($con, $query);
         
         if (mysqli_num_rows($result) == 1) {
             $row = mysqli_fetch_assoc($result);
             if ($row['User_Type'] == "User") {
                 
-                $_SESSION['user_id'] = $row['User_ID'];
+                $_SESSION['user_id'] = $row['studid'];
                 header("Location: userSide.php");
             }
          else {

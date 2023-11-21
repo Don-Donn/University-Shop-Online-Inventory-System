@@ -74,25 +74,24 @@ include'../includes/sidebar.php';
         </div>
         <div class="addForm">
             <form method="POST">
+                <?php
+                $empid = isset($_GET['empid']) ? $_GET['empid'] : '';
+                ?>
                 
-                <label for="accountEmail">Email:</label><br>
-                <input type="text" id="accountEmail" name="accountEmail" required>
-                <br>
-                
-                <label for="accountName">Name:</label><br>
-                <input type="text" id="accountName" name="accountName" required>
+                <label for="ID">ID:</label><br>
+                <input type="text" id="ID" name="ID" value="<?php echo $empid; ?>" readonly>
                 <br>
                 
                 <label for="accPassword">Current Password:</label><br>
-                <input type="number" id="accPassword" name="accPassword" required>
+                <input type="text" id="accPassword" name="accPassword" required>
                 <br>
 
                 <label for="newPassword">New Password:</label><br>
-                <input type="number" id="newPassword" name="newPassword" required>
+                <input type="text" id="newPassword" name="newPassword" required>
                 <br>
 
                 <label for="retypePass">Confirm New Password:</label><br>
-                <input type="number" id="retypePass" name="retypePass" required>
+                <input type="text" id="retypePass" name="retypePass" required>
                 <br>               
                 
                 <button class="addButton" type="submit" name="addButton">UPDATE</button>
@@ -102,7 +101,38 @@ include'../includes/sidebar.php';
     </div>
     
     <!--End of transaction.php content -->
+        <?php
+        include("../includes/connection.php");
 
+        if ($con->connect_error) {
+            die("Connection failed: " . $con->connect_error);
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $empid = $_POST['ID'];
+            $curpassword = $_POST['accPassword'];
+            $newpassword = $_POST['newPassword'];
+            $confirmpassword = $_POST['retryPass'];
+
+
+
+                $sql = "UPDATE emp_data SET User_Password = ? WHERE empid = ?";
+                $stmt = $con->prepare($sql);
+                
+                $stmt->bind_param("si", $newpassword, $empid);
+
+                $stmt->execute();
+
+                if ($stmt->affected_rows > 0) {
+                    echo "<script>alert('Password updated successfully!')</script>";
+                } else {
+                    echo "<script>alert('Error updating password')</script>";
+                }
+
+                $stmt->close();
+            }
+        $con->close();
+        ?>
 <?php
 include'../includes/footer.php';
 ?>
