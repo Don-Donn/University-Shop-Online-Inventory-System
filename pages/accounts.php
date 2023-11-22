@@ -13,16 +13,33 @@ include'../includes/sidebar.php';
     background: rgb(245, 245, 245);
     }
 
+    #ad-head{
+    display: inline-block;
+    }
+
     .m-2{
     color: maroon;
+    display; inline;
+    }
+
+    #add-user{
+    display: inline-block;
+    position: absolute;
+    left: 225px;
+    top: 25px;
+    margin: 5px;
+    padding: 5px;
     }
     </style>
 
     <div class="cardProduct">
         <!-- ADMIN TABLE -->
         <div class="card shadow mb-4">
-            <div class="card-header py-3">
+            <div class="card-header py-3" id="ad-head">
                 <h4 class="m-2 font-weight-bold">Admin Account(s)</h4>
+                <a class="add-btn"  href="addAccount.php">
+                    <i class="fa-solid fa-user-plus fa-2xl" id="add-user" style="color: #ffd700;"></i>
+                </a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -48,7 +65,7 @@ include'../includes/sidebar.php';
                             echo "<td>" . $row["User_Email"] . "</td>";
                             echo "<td>" . $row["firstname"] . " " . $row["lastname"] . "</td>";
                             echo "<td>" . $row["User_Password"] . "</td>";
-                            echo "<td><button onclick='editAccount(" . $row["empid"] . ")'>Edit</button></td>";
+                            echo "<td><button style='padding: 1px 15px; display: flex; justify-content: center; text-align: center; border-radius: 5px; background-color: maroon; color: white;' onclick='editAccount(" . $row["empid"] . ")'>EDIT</button></td>";
                             echo "</tr>";
                         }
                     }   
