@@ -19,7 +19,6 @@ nav{
 }
 
 #logout-icon, a{
-    filter: invert(1);
     position: absolute;
     left: 90%;
     margin-top: -45px;

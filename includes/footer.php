@@ -17,7 +17,7 @@
                     padding-bottom: 5px;
                     display:block;
                     width: calc(100% - 300px);
-                    background: rgb(245, 245, 245);
+                    background: white;
                 }
                 .copyright{
                     color: maroon;
@@ -30,7 +30,7 @@
             <footer class="sticky-footer">
                 <div class="container">
                 <div class="copyright text-center">
-                    <span>Copyright © Maranan & Anuyo et al. Online Inventory System</span>
+                    <span>Copyright © Maranan & Anuyo et al.</span>
                 </div>
                 </div>
             </footer>

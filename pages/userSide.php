@@ -34,9 +34,9 @@
                 if (mysqli_num_rows($result) == 1) {
                     $row = mysqli_fetch_assoc($result);
                     $first_name = $row['firstname'];
-                    echo "<h6 style='position: absolute; top: 43px; right: 133px; color: white;'>$first_name</h6>";
+                    echo "<h6 style='position: absolute; top: 43px; left: 89%; color: white;'>$first_name</h6>";
                 } else {
-                    echo "<h6 style='position: absolute; top: 43px; right: 133px; color: white;'>User</h6>";
+                    echo "<h6 style='position: absolute; top: 43px; left: 89%; color: white;'>User</h6>";
                 }
             } else {
 
@@ -45,8 +45,8 @@
         ?>
         </div>
             <a class="logout-btn">
-                <img type="button" id="logout-icon" src="../icons/logout2.png" alt="Logout" width="42px" height="42px" ">
-             </a>
+                <img type="button" id="logout-icon" src="../icons/logout2.png" alt="Logout" width="44px" height="42px" ">
+            </a>
         </div>
     </nav>
 

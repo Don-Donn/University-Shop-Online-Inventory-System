@@ -1,7 +1,7 @@
 
    <!-- div for Content Wrapper of top bar-->
         <!-- div for Main Content of topbar -->
-    <div id="content-wrapper">
+        <div id="content-wrapper">
         <style>
             .topbar-header{
             margin: 0;
@@ -49,12 +49,12 @@
                     if (mysqli_num_rows($result) == 1) {
                         $row = mysqli_fetch_assoc($result);
                         $first_name = $row['firstname'];
-                        echo "<h6 style='position: absolute; top: 40px; right: 15px; color: black;'>Admin $first_name</h6>";
+                        echo "<h6 style='position: absolute; top: 40px; right: 15px; color: black;'>Staff $first_name</h6>";
                     } else {
-                        echo "<h6 style='position: absolute; top: 40px; right: 15px; color: black;'>Admin</h6>";
+                        echo "<h6 style='position: absolute; top: 40px; right: 15px; color: black;'>RGO Staff</h6>";
                     }
                 } else {
-                    header("Location: loginAdmin.php");
+                    header("Location: loginRGOstaff.php");
                 }
             ?>
             </div>

@@ -63,7 +63,7 @@ input{
     display: block;
     width: 100%;
     outline: none;
-    padding: 15px 0;
+    padding: 15px 14px;
     font-size: 17px;
     border-radius: 6px;
     border: 1px solid rgba(0,0,0,0.2);
