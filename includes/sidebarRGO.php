@@ -26,28 +26,7 @@
                     <img id="spartanLlogo" src="../icons/redSpartan.png" alt="Logo" width="95" height="102" >
                     <p class="univ-txt">University <br>Shop</p>
                 </div>
-                <?php
-                    session_start();
-                    include("../includes/connection.php");
 
-                    if (isset($_SESSION['user_id'])) {
-                        $user_id = $_SESSION['user_id'];
-
-                        $query = "SELECT firstname FROM tbemployee WHERE empid = $user_id";
-                        $result = mysqli_query($con, $query);
-
-                        if (mysqli_num_rows($result) == 1) {
-                            $row = mysqli_fetch_assoc($result);
-                            $first_name = $row['firstname'];
-                            echo "<h6 style='position: absolute; top: 43px; right: 133px; color: white;'>$first_name</h6>";
-                        } else {
-                            echo "<h6 style='position: absolute; top: 43px; right: 133px; color: white;'>User</h6>";
-                        }
-                    } else {
-
-                        header("Location: loginRGOstaff.php");
-                    }
-                ?>
                 <ul>
 
                     <!-- Divider -->
@@ -100,7 +79,7 @@
 <!-- end div wrapper to footer-->
 
 <!-- include_once topbar/header -->
-<?php include_once 'topbar.php'; ?>
+<?php include_once 'topbarRGO.php'; ?>
 <?php include_once '../pages/logoutRGO.php'; ?>
 <!-- move end html tag to footer-->
 

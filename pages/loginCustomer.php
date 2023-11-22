@@ -58,9 +58,9 @@
         <form action=" " method="POST">
             <p class="please-login">Customer Login</p>
 
-            <input type="email" id="email" name="email" placeholder="  Email address" required><br>
+            <input type="email" id="email" name="email" placeholder="Email address" required><br>
 
-            <input type="password" id="password" name="password" placeholder="  Password" required><br>
+            <input type="password" id="password" name="password" placeholder="Password" required><br>
 
             <button type="submit" name="login_user" id="login-button" >Login</button>
 

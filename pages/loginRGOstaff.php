@@ -58,9 +58,9 @@
         <form action=" " method="post">
             <p class="admin-login">RGO Staff Login</p>
 
-            <input type="email" id="email" name="email" placeholder="  Staff Username" required><br>
+            <input type="email" id="email" name="email" placeholder="Staff Username" required><br>
 
-            <input type="password" id="password" name="password" placeholder="  Staff Password" required><br>
+            <input type="password" id="password" name="password" placeholder="Staff Password" required><br>
 
             <button type="submit" name="login_user" id="login-button">Login</button>
 

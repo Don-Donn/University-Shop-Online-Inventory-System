@@ -58,9 +58,9 @@
         <form action=" " method="post">
             <p class="admin-login">Admin Login</p>
 
-            <input type="email" id="email" name="email" placeholder="  Admin Username" required><br>
+            <input type="email" id="email" name="email" placeholder="Admin Username" required><br>
 
-            <input type="password" id="password" name="password" placeholder="  Admin Password" required><br>
+            <input type="password" id="password" name="password" placeholder="Admin Password" required><br>
 
             <button type="submit" name="login_user" id="login-button">Login</button>
 
