@@ -59,16 +59,29 @@ include'../includes/sidebar.php';
         border: none;
         cursor: pointer;
         }
-
+        .timestamp {
+            position: absolute;
+            top: 70px;
+            right: 10px;
+        }
 
     </style>
-
+            <div class="timestamp" id="timestamp"></div>
+            <script>
+                function updateTimestamp() {
+                    var timestampDiv = document.getElementById('timestamp');
+                    var now = new Date();
+                    var timestamp = now.toLocaleString();
+                    timestampDiv.innerText =  timestamp;
+                }
+                window.onload = updateTimestamp;
+            </script>
     <!--Start transaction.php content -->
     <div class="cardProduct">
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="true" style="color: white; background-color: maroon; font-weight: bold;" href="outStocks.php">EDIT ACCOUNT</a>
+                    <a class="nav-link active" aria-current="true" style="color: white; background-color: maroon; font-weight: bold;">EDIT ACCOUNT</a>
                 </li>             
             </ul>
         </div>
@@ -81,18 +94,10 @@ include'../includes/sidebar.php';
                 <label for="ID">ID:</label><br>
                 <input type="text" id="ID" name="ID" value="<?php echo $empid; ?>" readonly>
                 <br>
-                
-                <label for="accPassword">Current Password:</label><br>
-                <input type="text" id="accPassword" name="accPassword" required>
-                <br>
 
                 <label for="newPassword">New Password:</label><br>
                 <input type="text" id="newPassword" name="newPassword" required>
-                <br>
-
-                <label for="retypePass">Confirm New Password:</label><br>
-                <input type="text" id="retypePass" name="retypePass" required>
-                <br>               
+                <br>     
                 
                 <button class="addButton" type="submit" name="addButton">UPDATE</button>
             </form>
@@ -101,38 +106,35 @@ include'../includes/sidebar.php';
     </div>
     
     <!--End of transaction.php content -->
-        <?php
-        include("../includes/connection.php");
+    <?php
+    include("../includes/connection.php");
 
-        if ($con->connect_error) {
-            die("Connection failed: " . $con->connect_error);
+    if ($con->connect_error) {
+        die("Connection failed: " . $con->connect_error);
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $empid = $_POST['ID'];
+        $newpassword = $_POST['newPassword'];
+
+            $sql = "UPDATE emp_data SET User_Password = ? WHERE empid = ?";
+            $stmt = $con->prepare($sql);
+
+            $stmt->bind_param("si", $newpassword, $empid);
+
+            $stmt->execute();
+
+            if ($stmt->affected_rows > 0) {
+                echo "<script>alert('Password updated successfully!')</script>";
+            } else {
+                echo "<script>alert('Error updating password')</script>";
+            }
+
+            $stmt->close();
         }
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $empid = $_POST['ID'];
-            $curpassword = $_POST['accPassword'];
-            $newpassword = $_POST['newPassword'];
-            $confirmpassword = $_POST['retryPass'];
-
-
-
-                $sql = "UPDATE emp_data SET User_Password = ? WHERE empid = ?";
-                $stmt = $con->prepare($sql);
-                
-                $stmt->bind_param("si", $newpassword, $empid);
-
-                $stmt->execute();
-
-                if ($stmt->affected_rows > 0) {
-                    echo "<script>alert('Password updated successfully!')</script>";
-                } else {
-                    echo "<script>alert('Error updating password')</script>";
-                }
-
-                $stmt->close();
-            }
         $con->close();
-        ?>
+?>
 <?php
 include'../includes/footer.php';
 ?>

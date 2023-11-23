@@ -60,35 +60,59 @@ include'../includes/sidebar.php';
         border: none;
         cursor: pointer;
         }
+        .timestamp {
+            position: absolute;
+            top: 70px;
+            right: 10px;
+        }
 
 
     </style>
+            <div class="timestamp" id="timestamp"></div>
+            <script>
+                function updateTimestamp() {
+                    var timestampDiv = document.getElementById('timestamp');
+                    var now = new Date();
+                    var timestamp = now.toLocaleString();
+                    timestampDiv.innerText =  timestamp;
+                }
+                window.onload = updateTimestamp;
+            </script>
 
     <!--Start transaction.php content -->
     <div class="cardProduct">
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="true" style="color: white; background-color: maroon; font-weight: bold;" href="outStocks.php">ADD ACCOUNT</a>
+                    <a class="nav-link active" aria-current="true" style="color: white; background-color: maroon; font-weight: bold;">ADD ACCOUNT</a>
                 </li>             
             </ul>
         </div>
         <div class="addAccount">
             <form method="POST">
+
                 <label for="ID">ID:</label><br>
-                <input type="text" id="ID" name="ID" value="<?php echo $empid; ?>">
+                <input type="text" id="ID" name="ID" required>
                 <br>
 
                 <label for="firstName">First Name:</label><br>
-                <input type="text" id="firstName" name="firstName" value="<?php echo $empid; ?>">
+                <input type="text" id="firstName" name="firstName" required>
                 <br>
 
                 <label for="lastName">Last Name:</label><br>
-                <input type="text" id="lastName" name="lastName" value="<?php echo $empid; ?>">
+                <input type="text" id="lastName" name="lastName" required>
+                <br>
+
+                <label for="usertype">User Type:</label><br>
+                <input type="text" id="usertype" name="usertype" required>
+                <br>
+
+                <label for="department">Department:</label><br>
+                <input type="text" id="department" name="department" value="RGO" readonly>
                 <br>
 
                 <label for="emailAd">Email:</label><br>
-                <input type="text" id="emailAd" name="emailAd" value="<?php echo $empid; ?>">
+                <input type="text" id="emailAd" name="emailAd" required>
                 <br>
 
                 <label for="passWord">Password:</label><br>
@@ -104,7 +128,40 @@ include'../includes/sidebar.php';
         </div>
 
     </div>
+    <?php
+    include("../includes/connection.php");
+    error_reporting(E_ALL);
 
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addButton'])) {
+        // Retrieve form data
+        $empid = mysqli_real_escape_string($con, $_POST['ID']);
+        $firstName = mysqli_real_escape_string($con, $_POST['firstName']);
+        $lastName = mysqli_real_escape_string($con, $_POST['lastName']);
+        $usertype = mysqli_real_escape_string($con, $_POST['usertype']);
+        $dept = mysqli_real_escape_string($con, $_POST['department']);
+        $email = mysqli_real_escape_string($con, $_POST['emailAd']);
+        $password = mysqli_real_escape_string($con, $_POST['passWord']);
+        $confirmPassword = mysqli_real_escape_string($con, $_POST['retypePass']);
+
+        if ($password != $confirmPassword) {
+            echo "Password and Confirm Password do not match.";
+        } else {
+
+            $insertEmployeeQuery = "INSERT INTO tbemployee (empid, firstname, lastname, department) VALUES ('$empid', '$firstName', '$lastName', '$dept')";
+            $resultEmployee = mysqli_query($con, $insertEmployeeQuery);
+
+
+            $insertEmpDataQuery = "INSERT INTO emp_data (empid, User_Type, User_Email, User_Password) VALUES ('$empid', '$usertype', '$email', '$password')";
+            $resultEmpData = mysqli_query($con, $insertEmpDataQuery);
+
+            if ($resultEmployee && $resultEmpData) {
+                echo "<script>alert('Account added successfully!')</script>";
+            } else {
+                echo "Error: " . mysqli_error($con);
+            }
+        }
+    }
+?>
     
 <?php
 include'../includes/footer.php';

@@ -15,7 +15,22 @@ include'../includes/sidebar.php';
     .m-2{
     color: maroon;
     }
+    .timestamp {
+            position: absolute;
+            top: 70px;
+            right: 10px;
+        }
     </style>
+                <div class="timestamp" id="timestamp"></div>
+                <script>
+                function updateTimestamp() {
+                    var timestampDiv = document.getElementById('timestamp');
+                    var now = new Date();
+                    var timestamp = now.toLocaleString();
+                    timestampDiv.innerText =  timestamp;
+                }
+                window.onload = updateTimestamp;
+            </script>
 
     <!--Start productInventory.php content -->
     <div class="prodTable">

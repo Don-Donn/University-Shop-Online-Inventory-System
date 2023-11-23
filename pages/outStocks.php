@@ -1,4 +1,7 @@
 <?php
+session_start();
+?>
+<?php
 include'../includes/connection.php';
 include'../includes/sidebarRGO.php';
 ?>
@@ -82,8 +85,6 @@ include'../includes/sidebarRGO.php';
             </ul>
         </div>
         <?php
-        session_start();
-
         include("../includes/connection.php");
 
         if ($con->connect_error) {
@@ -128,7 +129,7 @@ include'../includes/sidebarRGO.php';
                 <br>
 
                 <label for="date">Date:</label><br>
-                <input type="date" id="date" name="date" required>
+                <input type="date" id="date" name="date" value="<?php echo date('Y-m-d'); ?>" readonly>
                 <br>
                 
                 <button class="addButton" type="submit" name="updateButton">UPDATE</button>

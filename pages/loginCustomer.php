@@ -8,7 +8,7 @@
         $useremail = $_POST['email'];
         $password = $_POST['password'];
 
-        $query = "SELECT * FROM stud_data WHERE User_Email = '$useremail'";
+        $query = "SELECT * FROM stud_data WHERE User_Email = '$useremail' AND User_Password = '$password'";
         $result = mysqli_query($con, $query);
         
         if (mysqli_num_rows($result) == 1) {

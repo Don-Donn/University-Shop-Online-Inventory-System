@@ -27,6 +27,11 @@
                 padding:0;
                 padding-top:5px;
             }
+            .timestamp {
+            position: absolute;
+            top: 70px;
+            right: 10px;
+        }
 
 
         </style>
@@ -36,9 +41,18 @@
             <header class="topbar-header">
                 <p class ="rgo-txt">RESOURCE GENERATION OFFICE </p>
             <div class="welcome">
+            <div class="timestamp" id="timestamp"></div>
+            <script>
+                function updateTimestamp() {
+                    var timestampDiv = document.getElementById('timestamp');
+                    var now = new Date();
+                    var timestamp = now.toLocaleString();
+                    timestampDiv.innerText =  timestamp;
+                }
+                window.onload = updateTimestamp;
+            </script>
             <?php
                 error_reporting(0);
-                session_start();
                 include("../includes/connection.php");
                 if (isset($_SESSION['user_id'])) {
                     $user_id = $_SESSION['user_id'];

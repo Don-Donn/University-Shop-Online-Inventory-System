@@ -30,7 +30,23 @@ include'../includes/sidebar.php';
     margin: 5px;
     padding: 5px;
     }
+    .timestamp {
+            position: absolute;
+            top: 70px;
+            right: 10px;
+        }
+
     </style>
+            <div class="timestamp" id="timestamp"></div>
+            <script>
+                function updateTimestamp() {
+                    var timestampDiv = document.getElementById('timestamp');
+                    var now = new Date();
+                    var timestamp = now.toLocaleString();
+                    timestampDiv.innerText =  timestamp;
+                }
+                window.onload = updateTimestamp;
+            </script>
 
     <div class="cardProduct">
         <!-- ADMIN TABLE -->
