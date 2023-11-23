@@ -1,11 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>UNIVERSITY SHOP</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
     <link rel="stylesheet" href="../css/userSide.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<style>
+                .timestamp {
+            position: absolute;
+            top: 90px;
+            right: 10px;
+            color: white;
+        }
+</style>
 </head>
 
 
@@ -21,6 +30,16 @@
             <h4 id = "location">BatStateU Lipa Campus</h4>
         <div>
         <div class="welcome">
+        <div class="timestamp" id="timestamp"></div>
+            <script>
+                function updateTimestamp() {
+                    var timestampDiv = document.getElementById('timestamp');
+                    var now = new Date();
+                    var timestamp = now.toLocaleString();
+                    timestampDiv.innerText =  timestamp;
+                }
+                window.onload = updateTimestamp;
+            </script>
         <?php
             session_start();
             include("../includes/connection.php");

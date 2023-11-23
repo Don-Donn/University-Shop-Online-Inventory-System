@@ -60,16 +60,31 @@ include'../includes/sidebar.php';
         border: none;
         cursor: pointer;
         }
+        .timestamp {
+            position: absolute;
+            top: 70px;
+            right: 10px;
+        }
 
 
     </style>
+            <div class="timestamp" id="timestamp"></div>
+            <script>
+                function updateTimestamp() {
+                    var timestampDiv = document.getElementById('timestamp');
+                    var now = new Date();
+                    var timestamp = now.toLocaleString();
+                    timestampDiv.innerText =  timestamp;
+                }
+                window.onload = updateTimestamp;
+            </script>
 
     <!--Start transaction.php content -->
     <div class="cardProduct">
         <div class="card-header">
             <ul class="nav nav-tabs card-header-tabs">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="true" style="color: white; background-color: maroon; font-weight: bold;" href="outStocks.php">ADD ACCOUNT</a>
+                    <a class="nav-link active" aria-current="true" style="color: white; background-color: maroon; font-weight: bold;">ADD ACCOUNT</a>
                 </li>             
             </ul>
         </div>
