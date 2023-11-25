@@ -5,6 +5,7 @@ University Shop Online Inventory System is a web-based application designed to m
 University Shop Online Inventory System has three kinds of users such as customer, admin and staff. 
 
 University Shop Online Inventory System has the following features:
+
 1. User Authentication: Secure login for customer, administrators and staff members.
 2. Product Management and Transactions: Add, edit, and delete products in the inventory. Categorize products for easy navigation.
 3. Account Management: Administrators can effortlessly create new admin and staff accounts also assigning passwords and edit them.
@@ -13,6 +14,7 @@ University Shop Online Inventory System has the following features:
 6. User Roles: Differentiate between customer, administrator and staff roles with distinct permissions. Ensure secure access and data management.
 
 TECHNOLOGIES USED
+
 Frontend: HTML, CSS, JavaScript
 Backend: Server-side scripting language (Php)
          Database (MySQL)
