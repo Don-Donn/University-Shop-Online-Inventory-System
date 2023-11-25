@@ -1,5 +1,6 @@
 # University-Shop-Online-Inventory-System
 OVERVIEW
+
 University Shop Online Inventory System is a web-based application designed to manage and streamline inventory processes for university shop. This system provides an efficient way to track and manage the stock of various products available in university store, offering a user-friendly interface for both customer, administrators and staff.
 University Shop Online Inventory System has three kinds of users such as customer, admin and staff. 
 
