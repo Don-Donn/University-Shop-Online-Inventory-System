@@ -137,72 +137,83 @@ include'../includes/sidebarRGO.php';
         </div>
 
     </div>
-    <?php
-    include("../includes/connection.php");
+<?php
+include("../includes/connection.php");
 
-    if ($con->connect_error) {
-        die("Connection failed: " . $con->connect_error);
-    }
+if ($con->connect_error) {
+    die("Connection failed: " . $con->connect_error);
+}
 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['updateButton'])) {
-        $productId = $_POST['productID'];
-        $quantity = $_POST['stocks'];
-        $transactionNo = $_POST['transaction'];
-        $date = $_POST['date'];
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['updateButton'])) {
+    $productId = $_POST['productID'];
+    $quantity = $_POST['stocks'];
+    $transactionNo = $_POST['transaction'];
+    $date = $_POST['date'];
 
-        $checkSql = "SELECT * FROM product WHERE Product_ID = ?";
-        $checkStmt = $con->prepare($checkSql);
-        $checkStmt->bind_param("i", $productId);
-        $checkStmt->execute();
-        $result = $checkStmt->get_result();
+    $checkSql = "SELECT * FROM product WHERE Product_ID = ?";
+    $checkStmt = $con->prepare($checkSql);
+    $checkStmt->bind_param("i", $productId);
+    $checkStmt->execute();
+    $result = $checkStmt->get_result();
 
-        if ($result->num_rows > 0) {
-            $updateSql = "UPDATE add_stocks SET Quantity = Quantity - ?, Transaction_No = ?, empid  = ?, Date = ?  WHERE Product_ID = ?";
-            $updateStmt = $con->prepare($updateSql);
-            $updateStmt->bind_param("isssi", $quantity, $transactionNo, $userID, $date, $productId);
-            $updateStmt->execute();
+    if ($result->num_rows > 0) {
+        $updateSql = "UPDATE add_stocks SET Quantity = Quantity - ?, Transaction_No = ?, empid = ?, Date = ?  WHERE Product_ID = ?";
+        $updateStmt = $con->prepare($updateSql);
+        $updateStmt->bind_param("isssi", $quantity, $transactionNo, $userID, $date, $productId);
+        $updateStmt->execute();
 
-            if ($updateStmt->affected_rows > 0) {
-                $checkOutStocksSql = "SELECT * FROM out_stocks WHERE Product_ID = ? AND Transaction_No = ?";
-                $checkOutStocksStmt = $con->prepare($checkOutStocksSql);
-                $checkOutStocksStmt->bind_param("is", $productId, $transactionNo);
-                $checkOutStocksStmt->execute();
-                $outStocksResult = $checkOutStocksStmt->get_result();
-            
-                if ($outStocksResult->num_rows > 0) {
-                    $updateOutStocksSql = "UPDATE out_stocks SET SoldStocks = SoldStocks + ? WHERE Product_ID = ? AND Transaction_No = ?";
-                    $updateOutStocksStmt = $con->prepare($updateOutStocksSql);
-                    $updateOutStocksStmt->bind_param("iis", $quantity, $productId, $transactionNo);
-                    $updateOutStocksStmt->execute();
-            
-                    if ($updateOutStocksStmt->affected_rows > 0) {
-                        echo "<script>alert('Sold stocks updated successfully!')</script>";
-                    } else {
-                        echo "<script>alert('Error updating SoldStocks in out_stocks table: " . $updateOutStocksStmt->error . "')</script>";
-                    }
-            
-                    $updateOutStocksStmt->close();
+        if ($updateStmt->affected_rows > 0) {
+            $checkOutStocksSql = "SELECT * FROM out_stocks WHERE Product_ID = ? AND Transaction_No = ?";
+            $checkOutStocksStmt = $con->prepare($checkOutStocksSql);
+            $checkOutStocksStmt->bind_param("is", $productId, $transactionNo);
+            $checkOutStocksStmt->execute();
+            $outStocksResult = $checkOutStocksStmt->get_result();
+
+            if ($outStocksResult->num_rows > 0) {
+                $updateOutStocksSql = "UPDATE out_stocks SET SoldStocks = SoldStocks + ?, empid = ?, Date = ? WHERE Product_ID = ? AND Transaction_No = ?";
+                $updateOutStocksStmt = $con->prepare($updateOutStocksSql);
+                $updateOutStocksStmt->bind_param("issis", $quantity, $userID, $date, $productId, $transactionNo);
+                $updateOutStocksStmt->execute();
+
+                if ($updateOutStocksStmt->affected_rows > 0) {
+                    echo "<script>alert('Sold stocks updated successfully!')</script>";
                 } else {
-                    echo "<script>alert('Error: Record not found in out_stocks table')</script>";
+                    echo "<script>alert('Error updating SoldStocks in out_stocks table: " . $updateOutStocksStmt->error . "')</script>";
                 }
-            
-                $checkOutStocksStmt->close();
+
+                $updateOutStocksStmt->close();
             } else {
-                echo "<script>alert('Error updating stocks')</script>";
+                $insertOutStocksSql = "INSERT INTO out_stocks (Product_ID, Transaction_No, SoldStocks, Date, empid) VALUES (?, ?, ?, ?, ?)";
+                $insertOutStocksStmt = $con->prepare($insertOutStocksSql);
+                $initialSoldStocks = $quantity;
+                $insertOutStocksStmt->bind_param("iissi", $productId, $transactionNo, $initialSoldStocks, $date, $userID);
+                $insertOutStocksStmt->execute();
+
+                if ($insertOutStocksStmt->affected_rows > 0) {
+                    echo "<script>alert('Sold stocks inserted successfully!')</script>";
+                } else {
+                    echo "<script>alert('Error inserting SoldStocks in out_stocks table: " . $insertOutStocksStmt->error . "')</script>";
+                }
+
+                $insertOutStocksStmt->close();
             }
 
-            $updateStmt->close();
+            $checkOutStocksStmt->close();
         } else {
-            echo "<script>alert('Product ID does not exist')</script>";
+            echo "<script>alert('Error updating stocks')</script>";
         }
 
-        $checkStmt->close();
+        $updateStmt->close();
+    } else {
+        echo "<script>alert('Product ID does not exist')</script>";
     }
 
-    $con->close();
-?>
+    $checkStmt->close();
+}
 
-    
+$con->close();
+?>
+  
     <!--End of transaction.php content -->
 
 <?php

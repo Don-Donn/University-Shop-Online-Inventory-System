@@ -53,9 +53,9 @@
                 if (mysqli_num_rows($result) == 1) {
                     $row = mysqli_fetch_assoc($result);
                     $first_name = $row['firstname'];
-                    echo "<h6 style='position: absolute; top: 43px; left: 89%; color: white;'>$first_name</h6>";
+                    echo "<h6 style='position: absolute; top: 43px; left: 85%; color: white;'>$first_name</h6>";
                 } else {
-                    echo "<h6 style='position: absolute; top: 43px; left: 89%; color: white;'>User</h6>";
+                    echo "<h6 style='position: absolute; top: 43px; left: 85%; color: white;'>User</h6>";
                 }
             } else {
 
@@ -91,7 +91,8 @@
         }
         $sql = "SELECT p.image, p.Category_Name, p.Product_Name, p.Description, a.Quantity, p.Price
                 FROM product as p
-                LEFT JOIN add_stocks as a ON p.Product_ID = a.Product_ID";
+                LEFT JOIN add_stocks as a ON p.Product_ID = a.Product_ID
+                ORDER BY p.Product_Name ASC";
         $result = $con->query($sql);
 
             if ($result->num_rows > 0) {

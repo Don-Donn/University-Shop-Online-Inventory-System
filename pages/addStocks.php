@@ -166,7 +166,6 @@ include'../includes/sidebarRGO.php';
         $result = $checkStmt->get_result();
 
         if ($result->num_rows > 0) {
-            // Check if the record exists in add_stocks
             $checkAddStocksSql = "SELECT * FROM add_stocks WHERE Product_ID = ?";
             $checkAddStocksStmt = $con->prepare($checkAddStocksSql);
             $checkAddStocksStmt->bind_param("i", $productId);
@@ -174,7 +173,6 @@ include'../includes/sidebarRGO.php';
             $addStocksResult = $checkAddStocksStmt->get_result();
 
             if ($addStocksResult->num_rows > 0) {
-                // Update quantity if the record already exists
                 $updateSql = "UPDATE add_stocks SET Quantity = Quantity + ?, Transaction_No = ?, empid = ?, Date = ? WHERE Product_ID = ?";
                 $updateStmt = $con->prepare($updateSql);
                 $updateStmt->bind_param("isssi", $quantity, $transactionNo, $empid, $date, $productId);
@@ -188,10 +186,9 @@ include'../includes/sidebarRGO.php';
 
                 $updateStmt->close();
             } else {
-                // Insert new record if it doesn't exist
                 $insertSql = "INSERT INTO add_stocks (Product_ID, Quantity, Transaction_No, empid, Date) VALUES (?, ?, ?, ?, ?)";
                 $insertStmt = $con->prepare($insertSql);
-                $insertStmt->bind_param("iissi", $productId, $quantity, $transactionNo, $empid, $date);
+                $insertStmt->bind_param("iisss", $productId, $quantity, $transactionNo, $empid, $date);
                 $insertStmt->execute();
 
                 if ($insertStmt->affected_rows > 0) {
