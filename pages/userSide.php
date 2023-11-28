@@ -98,7 +98,7 @@
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>";
-                    echo "<td><img src='../Images/" .$row["image"] . "' alt='Image not available' width='150' hegiht='100'></td>";
+                    echo "<td><img src='../Images/" .$row["image"] . "' alt='Image not available' width='150' hegiht='100' border='2'></td>";
                     echo "<td>" . $row["Product_Name"] . "</td>";
                     echo "<td>" . $row["Description"] . "</td>";
                     echo "<td>" . $row["Quantity"] . "</td>";
