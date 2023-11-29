@@ -91,8 +91,8 @@ include'../includes/sidebar.php';
         <div class="addAccount">
             <form method="POST">
 
-                <label for="ID">ID:</label><br>
-                <input type="text" id="ID" name="ID" required>
+                <label for="EC">EMPLOYEE CODE</label><br>
+                <input type="text" id="EC" name="EC" required>
                 <br>
 
                 <label for="firstName">First Name:</label><br>
@@ -134,7 +134,7 @@ include'../includes/sidebar.php';
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['addButton'])) {
         // Retrieve form data
-        $empid = mysqli_real_escape_string($con, $_POST['ID']);
+        $empid = mysqli_real_escape_string($con, $_POST['EC']);
         $firstName = mysqli_real_escape_string($con, $_POST['firstName']);
         $lastName = mysqli_real_escape_string($con, $_POST['lastName']);
         $usertype = mysqli_real_escape_string($con, $_POST['usertype']);
@@ -147,11 +147,11 @@ include'../includes/sidebar.php';
             echo "Password and Confirm Password do not match.";
         } else {
 
-            $insertEmployeeQuery = "INSERT INTO tbemployee (empid, firstname, lastname, department) VALUES ('$empid', '$firstName', '$lastName', '$dept')";
+            $insertEmployeeQuery = "INSERT INTO tbemployee (firstname, lastname, department) VALUES ('$firstName', '$lastName', '$dept')";
             $resultEmployee = mysqli_query($con, $insertEmployeeQuery);
 
 
-            $insertEmpDataQuery = "INSERT INTO emp_data (empid, User_Type, User_Email, User_Password) VALUES ('$empid', '$usertype', '$email', '$password')";
+            $insertEmpDataQuery = "INSERT INTO emp_data (empCode, User_Type, User_Email, User_Password) VALUES ('$empid', '$usertype', '$email', '$password')";
             $resultEmpData = mysqli_query($con, $insertEmpDataQuery);
 
             if ($resultEmployee && $resultEmpData) {
